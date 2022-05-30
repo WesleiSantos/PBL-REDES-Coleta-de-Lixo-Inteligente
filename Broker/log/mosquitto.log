@@ -322,3 +322,79 @@
 1653881147: Client mqtt_70a75a23360f closed its connection.
 1653881147: mosquitto version 2.0.14 terminating
 1653881147: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1653884595: mosquitto version 2.0.14 starting
+1653884595: Config loaded from /mosquitto/config/mosquitto.conf.
+1653884595: Opening ipv4 listen socket on port 1883.
+1653884595: Opening ipv6 listen socket on port 1883.
+1653884595: mosquitto version 2.0.14 running
+1653884601: New connection from 192.168.1.3:53636 on port 1883.
+1653884601: New client connected from 192.168.1.3:53636 as mqtt_6f0c1ce349b7 (p2, c1, k60, u'emqx').
+1653884601: No will message specified.
+1653884601: Sending CONNACK to mqtt_6f0c1ce349b7 (0, 0)
+1653884604: New connection from 192.168.1.4:44198 on port 1883.
+1653884604: New client connected from 192.168.1.4:44198 as mqtt_5dee90e7e398 (p2, c1, k60, u'emqx').
+1653884604: No will message specified.
+1653884604: Sending CONNACK to mqtt_5dee90e7e398 (0, 0)
+1653884604: Received SUBSCRIBE from mqtt_5dee90e7e398
+1653884604: 	dt/regiao_a/lixeira/qtd_lixo (QoS 0)
+1653884604: mqtt_5dee90e7e398 0 dt/regiao_a/lixeira/qtd_lixo
+1653884604: Sending SUBACK to mqtt_5dee90e7e398
+1653884606: Received PUBLISH from mqtt_6f0c1ce349b7 (d0, q0, r0, m0, 'dt/regiao_A/lixeira/qtd_lixo', ... (73 bytes))
+1653884611: Received PUBLISH from mqtt_6f0c1ce349b7 (d0, q0, r0, m0, 'dt/regiao_A/lixeira/qtd_lixo', ... (73 bytes))
+1653884616: Received PUBLISH from mqtt_6f0c1ce349b7 (d0, q0, r0, m0, 'dt/regiao_A/lixeira/qtd_lixo', ... (73 bytes))
+1653884621: Received PUBLISH from mqtt_6f0c1ce349b7 (d0, q0, r0, m0, 'dt/regiao_A/lixeira/qtd_lixo', ... (74 bytes))
+1653884626: Received PUBLISH from mqtt_6f0c1ce349b7 (d0, q0, r0, m0, 'dt/regiao_A/lixeira/qtd_lixo', ... (74 bytes))
+1653884631: Received PUBLISH from mqtt_6f0c1ce349b7 (d0, q0, r0, m0, 'dt/regiao_A/lixeira/qtd_lixo', ... (74 bytes))
+1653884636: Received PUBLISH from mqtt_6f0c1ce349b7 (d0, q0, r0, m0, 'dt/regiao_A/lixeira/qtd_lixo', ... (74 bytes))
+1653884641: Received PUBLISH from mqtt_6f0c1ce349b7 (d0, q0, r0, m0, 'dt/regiao_A/lixeira/qtd_lixo', ... (74 bytes))
+1653884646: Received PUBLISH from mqtt_6f0c1ce349b7 (d0, q0, r0, m0, 'dt/regiao_A/lixeira/qtd_lixo', ... (74 bytes))
+1653884651: Received PUBLISH from mqtt_6f0c1ce349b7 (d0, q0, r0, m0, 'dt/regiao_A/lixeira/qtd_lixo', ... (74 bytes))
+1653884655: Client mqtt_5dee90e7e398 closed its connection.
+1653884656: Received PUBLISH from mqtt_6f0c1ce349b7 (d0, q0, r0, m0, 'dt/regiao_A/lixeira/qtd_lixo', ... (74 bytes))
+1653884661: Received PUBLISH from mqtt_6f0c1ce349b7 (d0, q0, r0, m0, 'dt/regiao_A/lixeira/qtd_lixo', ... (74 bytes))
+1653884665: Client mqtt_6f0c1ce349b7 closed its connection.
+1653884666: mosquitto version 2.0.14 terminating
+1653884666: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1653884673: mosquitto version 2.0.14 starting
+1653884673: Config loaded from /mosquitto/config/mosquitto.conf.
+1653884673: Opening ipv4 listen socket on port 1883.
+1653884673: Opening ipv6 listen socket on port 1883.
+1653884673: mosquitto version 2.0.14 running
+1653884677: New connection from 192.168.1.3:53640 on port 1883.
+1653884677: New client connected from 192.168.1.3:53640 as mqtt_c265e1259643 (p2, c1, k60, u'emqx').
+1653884677: No will message specified.
+1653884677: Sending CONNACK to mqtt_c265e1259643 (0, 0)
+1653884678: New connection from 192.168.1.4:44200 on port 1883.
+1653884678: New client connected from 192.168.1.4:44200 as mqtt_2787fd7de8f (p2, c1, k60, u'emqx').
+1653884678: No will message specified.
+1653884678: Sending CONNACK to mqtt_2787fd7de8f (0, 0)
+1653884678: Received SUBSCRIBE from mqtt_2787fd7de8f
+1653884678: 	dt/regiao_a/lixeira/qtd_lixo (QoS 0)
+1653884678: mqtt_2787fd7de8f 0 dt/regiao_a/lixeira/qtd_lixo
+1653884678: Sending SUBACK to mqtt_2787fd7de8f
+1653884682: Received PUBLISH from mqtt_c265e1259643 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (74 bytes))
+1653884682: Sending PUBLISH to mqtt_2787fd7de8f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (74 bytes))
+1653884687: Received PUBLISH from mqtt_c265e1259643 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (74 bytes))
+1653884687: Sending PUBLISH to mqtt_2787fd7de8f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (74 bytes))
+1653884692: Received PUBLISH from mqtt_c265e1259643 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (74 bytes))
+1653884692: Sending PUBLISH to mqtt_2787fd7de8f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (74 bytes))
+1653884697: Received PUBLISH from mqtt_c265e1259643 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (75 bytes))
+1653884697: Sending PUBLISH to mqtt_2787fd7de8f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (75 bytes))
+1653884702: Received PUBLISH from mqtt_c265e1259643 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (75 bytes))
+1653884702: Sending PUBLISH to mqtt_2787fd7de8f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (75 bytes))
+1653884707: Received PUBLISH from mqtt_c265e1259643 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (75 bytes))
+1653884707: Sending PUBLISH to mqtt_2787fd7de8f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (75 bytes))
+1653884712: Received PUBLISH from mqtt_c265e1259643 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (75 bytes))
+1653884712: Sending PUBLISH to mqtt_2787fd7de8f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (75 bytes))
+1653884717: Received PUBLISH from mqtt_c265e1259643 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (75 bytes))
+1653884717: Sending PUBLISH to mqtt_2787fd7de8f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (75 bytes))
+1653884722: Received PUBLISH from mqtt_c265e1259643 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (75 bytes))
+1653884722: Sending PUBLISH to mqtt_2787fd7de8f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (75 bytes))
+1653884727: Received PUBLISH from mqtt_c265e1259643 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (75 bytes))
+1653884727: Sending PUBLISH to mqtt_2787fd7de8f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (75 bytes))
+1653884729: Client mqtt_2787fd7de8f closed its connection.
+1653884732: Received PUBLISH from mqtt_c265e1259643 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (75 bytes))
+1653884737: Received PUBLISH from mqtt_c265e1259643 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (75 bytes))
+1653884739: Client mqtt_c265e1259643 closed its connection.
+1653884739: mosquitto version 2.0.14 terminating
+1653884739: Saving in-memory database to /mosquitto/data//mosquitto.db.
