@@ -46,14 +46,17 @@ client.on("connect", function () {
 });
 
 client.on("message", function (topic, message) {
-  console.log("Received Message:", topic, message.toString());
+  //console.log("Received Message:", topic, message.toString());
   if (topic == topicLixeira) {
+    var json = JSON.parse(message.toString());
+    console.log("Received Message:", topic, message.toString());
+    /*
     if (list.length == 0) {
       var json = JSON.parse(message.toString());
       console.log("Received Message:", topic, message.toString());
-      /*console.log(json.id);
-      list.push(json.id);
-      console.log(list);*/
+      //console.log(json.id);
+      //list.push(json.id);
+      //console.log(list);
     } else {
       var json = JSON.parse(message.toString());
 
@@ -61,9 +64,9 @@ client.on("message", function (topic, message) {
         console.log(message.toString());
       } else {
         var json = JSON.parse(message.toString());
-        /*list.push(json.id);
-        console.log(list);*/
+      //list.push(json.id);
+        //console.log(list);
       }
-    }
+    }*/
   }
 });
