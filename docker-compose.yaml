@@ -47,7 +47,7 @@ services:
     build: 
       context: ./Estacao
       dockerfile: dockerfile.estacao
-    command: sh -c "npm start"
+    command: sh -c "npm install mqtt --save && npm start"
     networks:
         my-network: 
           ipv4_address: 192.168.1.4
