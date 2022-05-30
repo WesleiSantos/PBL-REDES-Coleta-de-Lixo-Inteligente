@@ -5,6 +5,8 @@ const port = "1883";
 const clientId = `mqtt_${Math.random().toString(16).slice(3)}`;
 const connectUrl = `mqtt://${host}:${port}`;
 let client = null;
+let qtd_lixeira = 10;
+let regiao = "A";
 
 client = mqtt.connect(connectUrl, {
   clientId,
@@ -41,12 +43,12 @@ var latitude = Math.floor(90 * Math.random() + 1);
 var longitude = Math.floor(90 * Math.random() + 1);
 var payload = {
   lixeiraID,
-  regiao: "A",
+  regiao,
   capacidade: 0.0,
   longitude,
   latitude,
 };
-const topic = "dt/regiao_a/lixeira/qtd_lixo";
+const topic = `dt/regiao_${regiao}/lixeira/qtd_lixo`;
 
 client.on("connect", () => {
   console.log("Connected");
