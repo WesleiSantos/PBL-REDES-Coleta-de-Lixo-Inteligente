@@ -1,0 +1,59 @@
+networks:
+  my-network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.1.0/24 
+services:
+  mosquitto:
+      image: mosquitto
+      tty: true        # docker run -t
+      restart: on-failure
+      build: 
+        context: ./Broker
+        dockerfile: dockerfile.broker
+      ports: 
+        - 9001:9001
+        - 1883:1883
+      networks:
+        my-network:
+          ipv4_address: 192.168.1.2
+      volumes:
+        - ./Broker/config:/mosquitto/config
+        - ./Broker/log:/mosquitto/log
+        - ./Broker/data:/mosquitto/data
+
+  lixeira:
+    image: node
+    tty: true        # docker run -t
+    restart: on-failure
+    build: 
+      context: ./Lixeira
+      dockerfile: dockerfile.lixeira
+    command: sh -c "npm start"
+    networks:
+        my-network: 
+          ipv4_address: 192.168.1.3
+    volumes:
+        - ./Lixeira:/app
+    depends_on:
+      - mosquitto
+
+  estacao:
+    image: node
+    tty: true        # docker run -t
+    restart: on-failure
+    build: 
+      context: ./Estacao
+      dockerfile: dockerfile.estacao
+    command: sh -c "npm start"
+    networks:
+        my-network: 
+          ipv4_address: 192.168.1.4
+    volumes:
+        - ./Estacao:/app
+    depends_on:
+      - lixeira
+  
+
