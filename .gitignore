@@ -4,3 +4,5 @@ mosquitto.log
 
 Broker/log
 Broker/data
+
+*.log
