@@ -55,5 +55,22 @@ services:
         - ./Estacao:/app
     depends_on:
       - lixeira
+
+  caminhao:
+    image: node
+    tty: true        # docker run -t
+    restart: on-failure
+    build: 
+      context: ./Caminhao
+      dockerfile: dockerfile.caminhao
+    command: sh -c "npm install mqtt --save && npm start"
+    networks:
+        my-network: 
+          ipv4_address: 192.168.1.5
+    volumes:
+        - ./Caminhao:/app
+    depends_on:
+      - estacao
+    
   
 

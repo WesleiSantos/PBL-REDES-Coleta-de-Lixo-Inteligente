@@ -398,3 +398,728 @@
 1653884739: Client mqtt_c265e1259643 closed its connection.
 1653884739: mosquitto version 2.0.14 terminating
 1653884739: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1653940695: mosquitto version 2.0.14 starting
+1653940695: Config loaded from /mosquitto/config/mosquitto.conf.
+1653940695: Opening ipv4 listen socket on port 1883.
+1653940695: Opening ipv6 listen socket on port 1883.
+1653940695: mosquitto version 2.0.14 running
+1653940701: New connection from 192.168.1.3:37032 on port 1883.
+1653940701: New connection from 192.168.1.3:37034 on port 1883.
+1653940701: New connection from 192.168.1.3:37036 on port 1883.
+1653940701: New connection from 192.168.1.3:37038 on port 1883.
+1653940701: New connection from 192.168.1.3:37040 on port 1883.
+1653940701: New client connected from 192.168.1.3:37032 as mqtt_2c3aab4bc26f (p2, c1, k60, u'emqx').
+1653940701: No will message specified.
+1653940701: Sending CONNACK to mqtt_2c3aab4bc26f (0, 0)
+1653940701: New client connected from 192.168.1.3:37034 as mqtt_187ee664763f (p2, c1, k60, u'emqx').
+1653940701: No will message specified.
+1653940701: Sending CONNACK to mqtt_187ee664763f (0, 0)
+1653940701: New client connected from 192.168.1.3:37036 as mqtt_aaa0c540d78c (p2, c1, k60, u'emqx').
+1653940701: No will message specified.
+1653940701: Sending CONNACK to mqtt_aaa0c540d78c (0, 0)
+1653940701: New client connected from 192.168.1.3:37038 as mqtt_36570adfbd65 (p2, c1, k60, u'emqx').
+1653940701: No will message specified.
+1653940701: Sending CONNACK to mqtt_36570adfbd65 (0, 0)
+1653940701: New client connected from 192.168.1.3:37040 as mqtt_14684f59da3a (p2, c1, k60, u'emqx').
+1653940701: No will message specified.
+1653940701: Sending CONNACK to mqtt_14684f59da3a (0, 0)
+1653940702: New connection from 192.168.1.4:45448 on port 1883.
+1653940702: New client connected from 192.168.1.4:45448 as mqtt_529b5c1ad3ea (p2, c1, k60, u'emqx').
+1653940702: No will message specified.
+1653940702: Sending CONNACK to mqtt_529b5c1ad3ea (0, 0)
+1653940702: Received SUBSCRIBE from mqtt_529b5c1ad3ea
+1653940702: 	dt/regiao_a/lixeira/qtd_lixo (QoS 0)
+1653940702: mqtt_529b5c1ad3ea 0 dt/regiao_a/lixeira/qtd_lixo
+1653940702: Sending SUBACK to mqtt_529b5c1ad3ea
+1653940706: Received PUBLISH from mqtt_2c3aab4bc26f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940706: Sending PUBLISH to mqtt_529b5c1ad3ea (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940706: Received PUBLISH from mqtt_187ee664763f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (65 bytes))
+1653940706: Sending PUBLISH to mqtt_529b5c1ad3ea (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (65 bytes))
+1653940706: Received PUBLISH from mqtt_aaa0c540d78c (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940706: Sending PUBLISH to mqtt_529b5c1ad3ea (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940706: Received PUBLISH from mqtt_36570adfbd65 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940706: Sending PUBLISH to mqtt_529b5c1ad3ea (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940706: Received PUBLISH from mqtt_14684f59da3a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940706: Sending PUBLISH to mqtt_529b5c1ad3ea (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940711: Received PUBLISH from mqtt_2c3aab4bc26f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940711: Sending PUBLISH to mqtt_529b5c1ad3ea (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940711: Received PUBLISH from mqtt_187ee664763f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (65 bytes))
+1653940711: Sending PUBLISH to mqtt_529b5c1ad3ea (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (65 bytes))
+1653940711: Received PUBLISH from mqtt_aaa0c540d78c (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940711: Sending PUBLISH to mqtt_529b5c1ad3ea (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940711: Received PUBLISH from mqtt_36570adfbd65 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940711: Sending PUBLISH to mqtt_529b5c1ad3ea (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940711: Received PUBLISH from mqtt_14684f59da3a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940711: Sending PUBLISH to mqtt_529b5c1ad3ea (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940716: Received PUBLISH from mqtt_2c3aab4bc26f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940716: Sending PUBLISH to mqtt_529b5c1ad3ea (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940716: Received PUBLISH from mqtt_187ee664763f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653940716: Sending PUBLISH to mqtt_529b5c1ad3ea (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653940716: Received PUBLISH from mqtt_aaa0c540d78c (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940716: Sending PUBLISH to mqtt_529b5c1ad3ea (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940716: Received PUBLISH from mqtt_36570adfbd65 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940716: Sending PUBLISH to mqtt_529b5c1ad3ea (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940716: Received PUBLISH from mqtt_14684f59da3a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940716: Sending PUBLISH to mqtt_529b5c1ad3ea (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940721: Received PUBLISH from mqtt_2c3aab4bc26f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940721: Sending PUBLISH to mqtt_529b5c1ad3ea (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940721: Received PUBLISH from mqtt_187ee664763f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653940721: Sending PUBLISH to mqtt_529b5c1ad3ea (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653940721: Received PUBLISH from mqtt_aaa0c540d78c (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940721: Sending PUBLISH to mqtt_529b5c1ad3ea (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940721: Received PUBLISH from mqtt_36570adfbd65 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940721: Sending PUBLISH to mqtt_529b5c1ad3ea (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940721: Received PUBLISH from mqtt_14684f59da3a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940721: Sending PUBLISH to mqtt_529b5c1ad3ea (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940724: Client mqtt_529b5c1ad3ea closed its connection.
+1653940726: Received PUBLISH from mqtt_2c3aab4bc26f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940726: Received PUBLISH from mqtt_187ee664763f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653940726: Received PUBLISH from mqtt_aaa0c540d78c (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940726: Received PUBLISH from mqtt_36570adfbd65 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940726: Received PUBLISH from mqtt_14684f59da3a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940731: Received PUBLISH from mqtt_2c3aab4bc26f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940731: Received PUBLISH from mqtt_187ee664763f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653940731: Received PUBLISH from mqtt_aaa0c540d78c (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940731: Received PUBLISH from mqtt_36570adfbd65 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940731: Received PUBLISH from mqtt_14684f59da3a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940734: Client mqtt_14684f59da3a closed its connection.
+1653940734: Client mqtt_36570adfbd65 closed its connection.
+1653940734: Client mqtt_aaa0c540d78c closed its connection.
+1653940734: Client mqtt_187ee664763f closed its connection.
+1653940734: Client mqtt_2c3aab4bc26f closed its connection.
+1653940734: mosquitto version 2.0.14 terminating
+1653940734: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1653940818: mosquitto version 2.0.14 starting
+1653940818: Config loaded from /mosquitto/config/mosquitto.conf.
+1653940818: Opening ipv4 listen socket on port 1883.
+1653940818: Opening ipv6 listen socket on port 1883.
+1653940818: mosquitto version 2.0.14 running
+1653940823: New connection from 192.168.1.3:37042 on port 1883.
+1653940823: New connection from 192.168.1.3:37044 on port 1883.
+1653940823: New connection from 192.168.1.3:37046 on port 1883.
+1653940823: New connection from 192.168.1.3:37050 on port 1883.
+1653940823: New connection from 192.168.1.3:37052 on port 1883.
+1653940823: New client connected from 192.168.1.3:37042 as mqtt_b251786c5155 (p2, c1, k60, u'emqx').
+1653940823: No will message specified.
+1653940823: Sending CONNACK to mqtt_b251786c5155 (0, 0)
+1653940823: New client connected from 192.168.1.3:37044 as mqtt_f44b965409b7 (p2, c1, k60, u'emqx').
+1653940823: No will message specified.
+1653940823: Sending CONNACK to mqtt_f44b965409b7 (0, 0)
+1653940823: New client connected from 192.168.1.3:37046 as mqtt_f3e8a71f7126 (p2, c1, k60, u'emqx').
+1653940823: No will message specified.
+1653940823: Sending CONNACK to mqtt_f3e8a71f7126 (0, 0)
+1653940823: New client connected from 192.168.1.3:37050 as mqtt_cc13834d9e7a (p2, c1, k60, u'emqx').
+1653940823: No will message specified.
+1653940823: Sending CONNACK to mqtt_cc13834d9e7a (0, 0)
+1653940823: New client connected from 192.168.1.3:37052 as mqtt_6520a2e7b544 (p2, c1, k60, u'emqx').
+1653940823: No will message specified.
+1653940823: Sending CONNACK to mqtt_6520a2e7b544 (0, 0)
+1653940823: New connection from 192.168.1.4:45450 on port 1883.
+1653940823: New client connected from 192.168.1.4:45450 as mqtt_64b32f1e343 (p2, c1, k60, u'emqx').
+1653940823: No will message specified.
+1653940823: Sending CONNACK to mqtt_64b32f1e343 (0, 0)
+1653940823: Received SUBSCRIBE from mqtt_64b32f1e343
+1653940823: 	dt/regiao_a/lixeira/qtd_lixo (QoS 0)
+1653940823: mqtt_64b32f1e343 0 dt/regiao_a/lixeira/qtd_lixo
+1653940823: Sending SUBACK to mqtt_64b32f1e343
+1653940828: Received PUBLISH from mqtt_b251786c5155 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940828: Sending PUBLISH to mqtt_64b32f1e343 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940828: Received PUBLISH from mqtt_f44b965409b7 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940828: Sending PUBLISH to mqtt_64b32f1e343 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940828: Received PUBLISH from mqtt_f3e8a71f7126 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940828: Sending PUBLISH to mqtt_64b32f1e343 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940828: Received PUBLISH from mqtt_cc13834d9e7a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940828: Sending PUBLISH to mqtt_64b32f1e343 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940828: Received PUBLISH from mqtt_6520a2e7b544 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (65 bytes))
+1653940828: Sending PUBLISH to mqtt_64b32f1e343 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (65 bytes))
+1653940833: Received PUBLISH from mqtt_b251786c5155 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940833: Sending PUBLISH to mqtt_64b32f1e343 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940833: Received PUBLISH from mqtt_f44b965409b7 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940833: Sending PUBLISH to mqtt_64b32f1e343 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940833: Received PUBLISH from mqtt_f3e8a71f7126 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940833: Sending PUBLISH to mqtt_64b32f1e343 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940833: Received PUBLISH from mqtt_cc13834d9e7a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940833: Sending PUBLISH to mqtt_64b32f1e343 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940833: Received PUBLISH from mqtt_6520a2e7b544 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (65 bytes))
+1653940833: Sending PUBLISH to mqtt_64b32f1e343 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (65 bytes))
+1653940838: Received PUBLISH from mqtt_b251786c5155 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940838: Sending PUBLISH to mqtt_64b32f1e343 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940838: Received PUBLISH from mqtt_f44b965409b7 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940838: Sending PUBLISH to mqtt_64b32f1e343 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940838: Received PUBLISH from mqtt_f3e8a71f7126 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940838: Sending PUBLISH to mqtt_64b32f1e343 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940838: Received PUBLISH from mqtt_cc13834d9e7a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940838: Sending PUBLISH to mqtt_64b32f1e343 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940838: Received PUBLISH from mqtt_6520a2e7b544 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (65 bytes))
+1653940838: Sending PUBLISH to mqtt_64b32f1e343 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (65 bytes))
+1653940842: Client mqtt_64b32f1e343 closed its connection.
+1653940843: Received PUBLISH from mqtt_b251786c5155 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940843: Received PUBLISH from mqtt_f44b965409b7 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940843: Received PUBLISH from mqtt_f3e8a71f7126 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940843: Received PUBLISH from mqtt_cc13834d9e7a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940843: Received PUBLISH from mqtt_6520a2e7b544 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (65 bytes))
+1653940848: Received PUBLISH from mqtt_b251786c5155 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940848: Received PUBLISH from mqtt_f44b965409b7 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940848: Received PUBLISH from mqtt_f3e8a71f7126 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940848: Received PUBLISH from mqtt_cc13834d9e7a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940848: Received PUBLISH from mqtt_6520a2e7b544 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653940852: Client mqtt_6520a2e7b544 closed its connection.
+1653940852: Client mqtt_cc13834d9e7a closed its connection.
+1653940852: Client mqtt_f3e8a71f7126 closed its connection.
+1653940852: Client mqtt_f44b965409b7 closed its connection.
+1653940852: Client mqtt_b251786c5155 closed its connection.
+1653940852: mosquitto version 2.0.14 terminating
+1653940852: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1653940879: mosquitto version 2.0.14 starting
+1653940879: Config loaded from /mosquitto/config/mosquitto.conf.
+1653940879: Opening ipv4 listen socket on port 1883.
+1653940879: Opening ipv6 listen socket on port 1883.
+1653940879: mosquitto version 2.0.14 running
+1653940885: New connection from 192.168.1.3:37054 on port 1883.
+1653940885: New connection from 192.168.1.3:37056 on port 1883.
+1653940885: New connection from 192.168.1.3:37058 on port 1883.
+1653940885: New connection from 192.168.1.3:37060 on port 1883.
+1653940885: New connection from 192.168.1.3:37062 on port 1883.
+1653940885: New client connected from 192.168.1.3:37054 as mqtt_5b9eefb728f6 (p2, c1, k60, u'emqx').
+1653940885: No will message specified.
+1653940885: Sending CONNACK to mqtt_5b9eefb728f6 (0, 0)
+1653940885: New client connected from 192.168.1.3:37056 as mqtt_3a3040d47ee (p2, c1, k60, u'emqx').
+1653940885: No will message specified.
+1653940885: Sending CONNACK to mqtt_3a3040d47ee (0, 0)
+1653940885: New client connected from 192.168.1.3:37058 as mqtt_1b83f0ebe65b (p2, c1, k60, u'emqx').
+1653940885: No will message specified.
+1653940885: Sending CONNACK to mqtt_1b83f0ebe65b (0, 0)
+1653940885: New client connected from 192.168.1.3:37060 as mqtt_c13a55c79b17 (p2, c1, k60, u'emqx').
+1653940885: No will message specified.
+1653940885: Sending CONNACK to mqtt_c13a55c79b17 (0, 0)
+1653940885: New client connected from 192.168.1.3:37062 as mqtt_a9f18544884b (p2, c1, k60, u'emqx').
+1653940885: No will message specified.
+1653940885: Sending CONNACK to mqtt_a9f18544884b (0, 0)
+1653940886: New connection from 192.168.1.4:45452 on port 1883.
+1653940886: New client connected from 192.168.1.4:45452 as mqtt_0e3426fb93ac (p2, c1, k60, u'emqx').
+1653940886: No will message specified.
+1653940886: Sending CONNACK to mqtt_0e3426fb93ac (0, 0)
+1653940886: Received SUBSCRIBE from mqtt_0e3426fb93ac
+1653940886: 	dt/regiao_a/lixeira/qtd_lixo (QoS 0)
+1653940886: mqtt_0e3426fb93ac 0 dt/regiao_a/lixeira/qtd_lixo
+1653940886: Sending SUBACK to mqtt_0e3426fb93ac
+1653940890: Received PUBLISH from mqtt_5b9eefb728f6 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (65 bytes))
+1653940890: Sending PUBLISH to mqtt_0e3426fb93ac (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (65 bytes))
+1653940890: Received PUBLISH from mqtt_3a3040d47ee (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940890: Sending PUBLISH to mqtt_0e3426fb93ac (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940890: Received PUBLISH from mqtt_1b83f0ebe65b (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653940890: Sending PUBLISH to mqtt_0e3426fb93ac (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653940890: Received PUBLISH from mqtt_c13a55c79b17 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653940890: Sending PUBLISH to mqtt_0e3426fb93ac (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653940890: Received PUBLISH from mqtt_a9f18544884b (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940890: Sending PUBLISH to mqtt_0e3426fb93ac (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940895: Received PUBLISH from mqtt_5b9eefb728f6 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (65 bytes))
+1653940895: Sending PUBLISH to mqtt_0e3426fb93ac (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (65 bytes))
+1653940895: Received PUBLISH from mqtt_3a3040d47ee (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940895: Sending PUBLISH to mqtt_0e3426fb93ac (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940895: Received PUBLISH from mqtt_1b83f0ebe65b (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653940895: Sending PUBLISH to mqtt_0e3426fb93ac (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653940895: Received PUBLISH from mqtt_c13a55c79b17 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653940895: Sending PUBLISH to mqtt_0e3426fb93ac (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653940895: Received PUBLISH from mqtt_a9f18544884b (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940895: Sending PUBLISH to mqtt_0e3426fb93ac (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940900: Received PUBLISH from mqtt_5b9eefb728f6 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (65 bytes))
+1653940900: Sending PUBLISH to mqtt_0e3426fb93ac (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (65 bytes))
+1653940900: Received PUBLISH from mqtt_3a3040d47ee (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940900: Sending PUBLISH to mqtt_0e3426fb93ac (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940900: Received PUBLISH from mqtt_1b83f0ebe65b (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653940900: Sending PUBLISH to mqtt_0e3426fb93ac (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653940900: Received PUBLISH from mqtt_c13a55c79b17 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653940900: Sending PUBLISH to mqtt_0e3426fb93ac (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653940900: Received PUBLISH from mqtt_a9f18544884b (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940900: Sending PUBLISH to mqtt_0e3426fb93ac (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940900: Client mqtt_0e3426fb93ac closed its connection.
+1653940905: Received PUBLISH from mqtt_5b9eefb728f6 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653940905: Received PUBLISH from mqtt_3a3040d47ee (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940905: Received PUBLISH from mqtt_1b83f0ebe65b (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653940905: Received PUBLISH from mqtt_c13a55c79b17 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653940905: Received PUBLISH from mqtt_a9f18544884b (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940910: Received PUBLISH from mqtt_5b9eefb728f6 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653940910: Received PUBLISH from mqtt_3a3040d47ee (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940910: Received PUBLISH from mqtt_1b83f0ebe65b (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940910: Received PUBLISH from mqtt_c13a55c79b17 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653940910: Received PUBLISH from mqtt_a9f18544884b (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653940910: Client mqtt_a9f18544884b closed its connection.
+1653940910: Client mqtt_c13a55c79b17 closed its connection.
+1653940910: Client mqtt_1b83f0ebe65b closed its connection.
+1653940910: Client mqtt_3a3040d47ee closed its connection.
+1653940910: Client mqtt_5b9eefb728f6 closed its connection.
+1653940911: mosquitto version 2.0.14 terminating
+1653940911: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1653941174: mosquitto version 2.0.14 starting
+1653941174: Config loaded from /mosquitto/config/mosquitto.conf.
+1653941174: Opening ipv4 listen socket on port 1883.
+1653941174: Opening ipv6 listen socket on port 1883.
+1653941174: mosquitto version 2.0.14 running
+1653941180: New connection from 192.168.1.3:37066 on port 1883.
+1653941180: New connection from 192.168.1.3:37068 on port 1883.
+1653941180: New connection from 192.168.1.3:37070 on port 1883.
+1653941180: New connection from 192.168.1.3:37072 on port 1883.
+1653941180: New connection from 192.168.1.3:37074 on port 1883.
+1653941180: New client connected from 192.168.1.3:37066 as mqtt_dd3c5fd6efb9 (p2, c1, k60, u'emqx').
+1653941180: No will message specified.
+1653941180: Sending CONNACK to mqtt_dd3c5fd6efb9 (0, 0)
+1653941180: New client connected from 192.168.1.3:37068 as mqtt_496765dd6802 (p2, c1, k60, u'emqx').
+1653941180: No will message specified.
+1653941180: Sending CONNACK to mqtt_496765dd6802 (0, 0)
+1653941180: New client connected from 192.168.1.3:37070 as mqtt_e966919f689b (p2, c1, k60, u'emqx').
+1653941180: No will message specified.
+1653941180: Sending CONNACK to mqtt_e966919f689b (0, 0)
+1653941180: New client connected from 192.168.1.3:37072 as mqtt_2e3a726fcf82 (p2, c1, k60, u'emqx').
+1653941180: No will message specified.
+1653941180: Sending CONNACK to mqtt_2e3a726fcf82 (0, 0)
+1653941180: New client connected from 192.168.1.3:37074 as mqtt_26ccbe8e990c (p2, c1, k60, u'emqx').
+1653941180: No will message specified.
+1653941180: Sending CONNACK to mqtt_26ccbe8e990c (0, 0)
+1653941181: New connection from 192.168.1.4:45454 on port 1883.
+1653941181: New client connected from 192.168.1.4:45454 as mqtt_bedb830faf8b (p2, c1, k60, u'emqx').
+1653941181: No will message specified.
+1653941181: Sending CONNACK to mqtt_bedb830faf8b (0, 0)
+1653941181: Received SUBSCRIBE from mqtt_bedb830faf8b
+1653941181: 	dt/regiao_a/lixeira/qtd_lixo (QoS 0)
+1653941181: mqtt_bedb830faf8b 0 dt/regiao_a/lixeira/qtd_lixo
+1653941181: Sending SUBACK to mqtt_bedb830faf8b
+1653941185: Received PUBLISH from mqtt_dd3c5fd6efb9 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941185: Sending PUBLISH to mqtt_bedb830faf8b (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941185: Received PUBLISH from mqtt_496765dd6802 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941185: Sending PUBLISH to mqtt_bedb830faf8b (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941185: Received PUBLISH from mqtt_e966919f689b (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941185: Sending PUBLISH to mqtt_bedb830faf8b (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941185: Received PUBLISH from mqtt_2e3a726fcf82 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941185: Sending PUBLISH to mqtt_bedb830faf8b (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941185: Received PUBLISH from mqtt_26ccbe8e990c (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941185: Sending PUBLISH to mqtt_bedb830faf8b (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941190: Received PUBLISH from mqtt_dd3c5fd6efb9 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941190: Sending PUBLISH to mqtt_bedb830faf8b (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941190: Received PUBLISH from mqtt_496765dd6802 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941190: Sending PUBLISH to mqtt_bedb830faf8b (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941190: Received PUBLISH from mqtt_e966919f689b (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941190: Sending PUBLISH to mqtt_bedb830faf8b (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941190: Received PUBLISH from mqtt_2e3a726fcf82 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941190: Sending PUBLISH to mqtt_bedb830faf8b (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941190: Received PUBLISH from mqtt_26ccbe8e990c (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941190: Sending PUBLISH to mqtt_bedb830faf8b (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941195: Client mqtt_bedb830faf8b closed its connection.
+1653941195: Received PUBLISH from mqtt_dd3c5fd6efb9 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941195: Received PUBLISH from mqtt_496765dd6802 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941195: Received PUBLISH from mqtt_e966919f689b (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941195: Received PUBLISH from mqtt_2e3a726fcf82 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941195: Received PUBLISH from mqtt_26ccbe8e990c (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941200: Received PUBLISH from mqtt_dd3c5fd6efb9 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941200: Received PUBLISH from mqtt_496765dd6802 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941200: Received PUBLISH from mqtt_e966919f689b (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941200: Received PUBLISH from mqtt_2e3a726fcf82 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941200: Received PUBLISH from mqtt_26ccbe8e990c (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941205: Received PUBLISH from mqtt_dd3c5fd6efb9 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941205: Received PUBLISH from mqtt_496765dd6802 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941205: Received PUBLISH from mqtt_e966919f689b (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941205: Received PUBLISH from mqtt_2e3a726fcf82 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941205: Received PUBLISH from mqtt_26ccbe8e990c (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941206: Client mqtt_26ccbe8e990c closed its connection.
+1653941206: Client mqtt_2e3a726fcf82 closed its connection.
+1653941206: Client mqtt_e966919f689b closed its connection.
+1653941206: Client mqtt_496765dd6802 closed its connection.
+1653941206: Client mqtt_dd3c5fd6efb9 closed its connection.
+1653941206: mosquitto version 2.0.14 terminating
+1653941206: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1653941220: mosquitto version 2.0.14 starting
+1653941220: Config loaded from /mosquitto/config/mosquitto.conf.
+1653941220: Opening ipv4 listen socket on port 1883.
+1653941220: Opening ipv6 listen socket on port 1883.
+1653941220: mosquitto version 2.0.14 running
+1653941225: New connection from 192.168.1.3:37076 on port 1883.
+1653941225: New connection from 192.168.1.3:37078 on port 1883.
+1653941225: New connection from 192.168.1.3:37080 on port 1883.
+1653941225: New connection from 192.168.1.3:37082 on port 1883.
+1653941225: New connection from 192.168.1.3:37084 on port 1883.
+1653941225: New client connected from 192.168.1.3:37076 as mqtt_89f32f70c576 (p2, c1, k60, u'emqx').
+1653941225: No will message specified.
+1653941225: Sending CONNACK to mqtt_89f32f70c576 (0, 0)
+1653941225: New client connected from 192.168.1.3:37078 as mqtt_6102d13e6dd7 (p2, c1, k60, u'emqx').
+1653941225: No will message specified.
+1653941225: Sending CONNACK to mqtt_6102d13e6dd7 (0, 0)
+1653941225: New client connected from 192.168.1.3:37080 as mqtt_a10350ae1437 (p2, c1, k60, u'emqx').
+1653941225: No will message specified.
+1653941225: Sending CONNACK to mqtt_a10350ae1437 (0, 0)
+1653941225: New client connected from 192.168.1.3:37082 as mqtt_449ebe92f00f (p2, c1, k60, u'emqx').
+1653941225: No will message specified.
+1653941225: Sending CONNACK to mqtt_449ebe92f00f (0, 0)
+1653941225: New client connected from 192.168.1.3:37084 as mqtt_6e1e768d38d7 (p2, c1, k60, u'emqx').
+1653941225: No will message specified.
+1653941225: Sending CONNACK to mqtt_6e1e768d38d7 (0, 0)
+1653941226: New connection from 192.168.1.4:45456 on port 1883.
+1653941226: New client connected from 192.168.1.4:45456 as mqtt_30c22c57320e (p2, c1, k60, u'emqx').
+1653941226: No will message specified.
+1653941226: Sending CONNACK to mqtt_30c22c57320e (0, 0)
+1653941226: Received SUBSCRIBE from mqtt_30c22c57320e
+1653941226: 	dt/regiao_a/lixeira/qtd_lixo (QoS 0)
+1653941226: mqtt_30c22c57320e 0 dt/regiao_a/lixeira/qtd_lixo
+1653941226: Sending SUBACK to mqtt_30c22c57320e
+1653941230: Received PUBLISH from mqtt_89f32f70c576 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941230: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941230: Received PUBLISH from mqtt_6102d13e6dd7 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653941230: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653941230: Received PUBLISH from mqtt_a10350ae1437 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653941230: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653941230: Received PUBLISH from mqtt_449ebe92f00f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941230: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941230: Received PUBLISH from mqtt_6e1e768d38d7 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941230: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941234: New connection from 192.168.1.5:55094 on port 1883.
+1653941234: New client connected from 192.168.1.5:55094 as mqtt_4f1905335c1b (p2, c1, k60, u'emqx').
+1653941234: No will message specified.
+1653941234: Sending CONNACK to mqtt_4f1905335c1b (0, 0)
+1653941234: Received SUBSCRIBE from mqtt_4f1905335c1b
+1653941234: 	dt/lixeira/prioritaria (QoS 0)
+1653941234: mqtt_4f1905335c1b 0 dt/lixeira/prioritaria
+1653941234: Sending SUBACK to mqtt_4f1905335c1b
+1653941235: Received PUBLISH from mqtt_89f32f70c576 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941235: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941235: Received PUBLISH from mqtt_6102d13e6dd7 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653941235: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653941235: Received PUBLISH from mqtt_a10350ae1437 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653941235: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653941235: Received PUBLISH from mqtt_449ebe92f00f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941235: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941235: Received PUBLISH from mqtt_6e1e768d38d7 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941235: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941240: Received PUBLISH from mqtt_89f32f70c576 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941240: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941240: Received PUBLISH from mqtt_6102d13e6dd7 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941240: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941240: Received PUBLISH from mqtt_a10350ae1437 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653941240: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653941240: Received PUBLISH from mqtt_449ebe92f00f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941240: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941240: Received PUBLISH from mqtt_6e1e768d38d7 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941240: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941245: Received PUBLISH from mqtt_89f32f70c576 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941245: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941245: Received PUBLISH from mqtt_6102d13e6dd7 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941245: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941245: Received PUBLISH from mqtt_a10350ae1437 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653941245: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (66 bytes))
+1653941245: Received PUBLISH from mqtt_449ebe92f00f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941245: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941245: Received PUBLISH from mqtt_6e1e768d38d7 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941245: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941250: Received PUBLISH from mqtt_89f32f70c576 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941250: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941250: Received PUBLISH from mqtt_6102d13e6dd7 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941250: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941250: Received PUBLISH from mqtt_a10350ae1437 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941250: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941250: Received PUBLISH from mqtt_449ebe92f00f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941250: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941250: Received PUBLISH from mqtt_6e1e768d38d7 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941250: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941255: Received PUBLISH from mqtt_89f32f70c576 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941255: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941255: Received PUBLISH from mqtt_6102d13e6dd7 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941255: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941255: Received PUBLISH from mqtt_a10350ae1437 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941255: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941255: Received PUBLISH from mqtt_449ebe92f00f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941255: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941255: Received PUBLISH from mqtt_6e1e768d38d7 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941255: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941260: Received PUBLISH from mqtt_89f32f70c576 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941260: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941260: Received PUBLISH from mqtt_6102d13e6dd7 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941260: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941260: Received PUBLISH from mqtt_a10350ae1437 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941260: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941260: Received PUBLISH from mqtt_449ebe92f00f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941260: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941260: Received PUBLISH from mqtt_6e1e768d38d7 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941260: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941265: Received PUBLISH from mqtt_89f32f70c576 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941265: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941265: Received PUBLISH from mqtt_6102d13e6dd7 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941265: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941265: Received PUBLISH from mqtt_a10350ae1437 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941265: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941265: Received PUBLISH from mqtt_449ebe92f00f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941265: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941265: Received PUBLISH from mqtt_6e1e768d38d7 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941265: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941268: Client mqtt_4f1905335c1b closed its connection.
+1653941270: Received PUBLISH from mqtt_89f32f70c576 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941270: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941270: Received PUBLISH from mqtt_6102d13e6dd7 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941270: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941270: Received PUBLISH from mqtt_a10350ae1437 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941270: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941270: Received PUBLISH from mqtt_449ebe92f00f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941270: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941270: Received PUBLISH from mqtt_6e1e768d38d7 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941270: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941275: Received PUBLISH from mqtt_89f32f70c576 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941275: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941275: Received PUBLISH from mqtt_6102d13e6dd7 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941275: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941275: Received PUBLISH from mqtt_a10350ae1437 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941275: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941275: Received PUBLISH from mqtt_449ebe92f00f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941275: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941275: Received PUBLISH from mqtt_6e1e768d38d7 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941275: Sending PUBLISH to mqtt_30c22c57320e (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941278: Client mqtt_30c22c57320e closed its connection.
+1653941280: Received PUBLISH from mqtt_89f32f70c576 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941280: Received PUBLISH from mqtt_6102d13e6dd7 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941280: Received PUBLISH from mqtt_a10350ae1437 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941280: Received PUBLISH from mqtt_449ebe92f00f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941280: Received PUBLISH from mqtt_6e1e768d38d7 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941285: Received PUBLISH from mqtt_89f32f70c576 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941285: Received PUBLISH from mqtt_6102d13e6dd7 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941285: Received PUBLISH from mqtt_a10350ae1437 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941285: Received PUBLISH from mqtt_449ebe92f00f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941285: Received PUBLISH from mqtt_6e1e768d38d7 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941289: Client mqtt_6e1e768d38d7 closed its connection.
+1653941289: Client mqtt_449ebe92f00f closed its connection.
+1653941289: Client mqtt_a10350ae1437 closed its connection.
+1653941289: Client mqtt_6102d13e6dd7 closed its connection.
+1653941289: Client mqtt_89f32f70c576 closed its connection.
+1653941289: mosquitto version 2.0.14 terminating
+1653941289: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1653941307: mosquitto version 2.0.14 starting
+1653941307: Config loaded from /mosquitto/config/mosquitto.conf.
+1653941307: Opening ipv4 listen socket on port 1883.
+1653941307: Opening ipv6 listen socket on port 1883.
+1653941307: mosquitto version 2.0.14 running
+1653941312: New connection from 192.168.1.3:37088 on port 1883.
+1653941312: New client connected from 192.168.1.3:37088 as mqtt_9d2a84d97d15 (p2, c1, k60, u'emqx').
+1653941312: No will message specified.
+1653941312: Sending CONNACK to mqtt_9d2a84d97d15 (0, 0)
+1653941312: New connection from 192.168.1.4:45458 on port 1883.
+1653941312: New client connected from 192.168.1.4:45458 as mqtt_50e59f29701a (p2, c1, k60, u'emqx').
+1653941312: No will message specified.
+1653941312: Sending CONNACK to mqtt_50e59f29701a (0, 0)
+1653941312: Received SUBSCRIBE from mqtt_50e59f29701a
+1653941312: 	dt/regiao_a/lixeira/qtd_lixo (QoS 0)
+1653941312: mqtt_50e59f29701a 0 dt/regiao_a/lixeira/qtd_lixo
+1653941312: Sending SUBACK to mqtt_50e59f29701a
+1653941313: New connection from 192.168.1.5:55096 on port 1883.
+1653941313: New client connected from 192.168.1.5:55096 as mqtt_276ee25b2232 (p2, c1, k60, u'emqx').
+1653941313: No will message specified.
+1653941313: Sending CONNACK to mqtt_276ee25b2232 (0, 0)
+1653941313: Received SUBSCRIBE from mqtt_276ee25b2232
+1653941313: 	dt/lixeira/prioritaria (QoS 0)
+1653941313: mqtt_276ee25b2232 0 dt/lixeira/prioritaria
+1653941313: Sending SUBACK to mqtt_276ee25b2232
+1653941317: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941317: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941322: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941322: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941327: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941327: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1653941332: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941332: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941337: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941337: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941342: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941342: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941347: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941347: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941352: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941352: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941357: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941357: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941362: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941362: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941367: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941367: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941372: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941372: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941372: Received PINGREQ from mqtt_50e59f29701a
+1653941372: Sending PINGRESP to mqtt_50e59f29701a
+1653941373: Received PINGREQ from mqtt_276ee25b2232
+1653941373: Sending PINGRESP to mqtt_276ee25b2232
+1653941377: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941377: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941382: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941382: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941387: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941387: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941392: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941392: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941397: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941397: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941402: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941402: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941407: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941407: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941412: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941412: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941417: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941417: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941422: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941422: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941427: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941427: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941432: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941432: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941432: Received PINGREQ from mqtt_50e59f29701a
+1653941432: Sending PINGRESP to mqtt_50e59f29701a
+1653941433: Received PINGREQ from mqtt_276ee25b2232
+1653941433: Sending PINGRESP to mqtt_276ee25b2232
+1653941437: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941437: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941442: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941442: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941447: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941447: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941452: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941452: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941457: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941457: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941462: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941462: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941467: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941467: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941472: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941472: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941477: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941477: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941482: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941482: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1653941487: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941487: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941492: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941492: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941492: Received PINGREQ from mqtt_50e59f29701a
+1653941492: Sending PINGRESP to mqtt_50e59f29701a
+1653941493: Received PINGREQ from mqtt_276ee25b2232
+1653941493: Sending PINGRESP to mqtt_276ee25b2232
+1653941497: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941497: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941502: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941502: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941507: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941507: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941512: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941512: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941517: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941517: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941522: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941522: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941527: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941527: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941532: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941532: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941537: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941537: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941542: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941542: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941547: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941547: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941552: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941552: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941552: Received PINGREQ from mqtt_50e59f29701a
+1653941552: Sending PINGRESP to mqtt_50e59f29701a
+1653941553: Received PINGREQ from mqtt_276ee25b2232
+1653941553: Sending PINGRESP to mqtt_276ee25b2232
+1653941557: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941557: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941562: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941562: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941567: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941567: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941572: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941572: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941577: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941577: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941582: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941582: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941587: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941587: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941592: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941592: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941597: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941597: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941602: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941602: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941607: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941607: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941612: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941612: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941612: Received PINGREQ from mqtt_50e59f29701a
+1653941612: Sending PINGRESP to mqtt_50e59f29701a
+1653941613: Received PINGREQ from mqtt_276ee25b2232
+1653941613: Sending PINGRESP to mqtt_276ee25b2232
+1653941617: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941617: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941622: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941622: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941627: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941627: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941632: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941632: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941637: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941637: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941642: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941642: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941647: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941647: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941649: Client mqtt_276ee25b2232 closed its connection.
+1653941652: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941652: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941657: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941657: Sending PUBLISH to mqtt_50e59f29701a (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941659: Client mqtt_50e59f29701a closed its connection.
+1653941662: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941667: Received PUBLISH from mqtt_9d2a84d97d15 (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (69 bytes))
+1653941669: Client mqtt_9d2a84d97d15 closed its connection.
+1653941670: mosquitto version 2.0.14 terminating
+1653941670: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1654030590: mosquitto version 2.0.14 starting
+1654030590: Config loaded from /mosquitto/config/mosquitto.conf.
+1654030590: Opening ipv4 listen socket on port 1883.
+1654030590: Opening ipv6 listen socket on port 1883.
+1654030590: mosquitto version 2.0.14 running
+1654030590: New connection from 192.168.1.3:44806 on port 1883.
+1654030590: New client connected from 192.168.1.3:44806 as mqtt_9a7fc892eb3f (p2, c1, k60, u'emqx').
+1654030590: No will message specified.
+1654030590: Sending CONNACK to mqtt_9a7fc892eb3f (0, 0)
+1654030591: New connection from 192.168.1.4:35050 on port 1883.
+1654030591: New client connected from 192.168.1.4:35050 as mqtt_6822f5b7980c (p2, c1, k60, u'emqx').
+1654030591: No will message specified.
+1654030591: Sending CONNACK to mqtt_6822f5b7980c (0, 0)
+1654030591: Received SUBSCRIBE from mqtt_6822f5b7980c
+1654030591: 	dt/regiao_a/lixeira/qtd_lixo (QoS 0)
+1654030591: mqtt_6822f5b7980c 0 dt/regiao_a/lixeira/qtd_lixo
+1654030591: Sending SUBACK to mqtt_6822f5b7980c
+1654030591: New connection from 192.168.1.5:34968 on port 1883.
+1654030591: New client connected from 192.168.1.5:34968 as mqtt_dd3450ca9369 (p2, c1, k60, u'emqx').
+1654030591: No will message specified.
+1654030591: Sending CONNACK to mqtt_dd3450ca9369 (0, 0)
+1654030591: Received SUBSCRIBE from mqtt_dd3450ca9369
+1654030591: 	dt/lixeira/prioritaria (QoS 0)
+1654030591: mqtt_dd3450ca9369 0 dt/lixeira/prioritaria
+1654030591: Sending SUBACK to mqtt_dd3450ca9369
+1654030595: Received PUBLISH from mqtt_9a7fc892eb3f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1654030595: Sending PUBLISH to mqtt_6822f5b7980c (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1654030600: Received PUBLISH from mqtt_9a7fc892eb3f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1654030600: Sending PUBLISH to mqtt_6822f5b7980c (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1654030605: Received PUBLISH from mqtt_9a7fc892eb3f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1654030605: Sending PUBLISH to mqtt_6822f5b7980c (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (67 bytes))
+1654030610: Received PUBLISH from mqtt_9a7fc892eb3f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1654030610: Sending PUBLISH to mqtt_6822f5b7980c (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1654030615: Received PUBLISH from mqtt_9a7fc892eb3f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1654030615: Sending PUBLISH to mqtt_6822f5b7980c (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1654030619: Client mqtt_dd3450ca9369 closed its connection.
+1654030620: Received PUBLISH from mqtt_9a7fc892eb3f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1654030620: Sending PUBLISH to mqtt_6822f5b7980c (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1654030625: Received PUBLISH from mqtt_9a7fc892eb3f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1654030625: Sending PUBLISH to mqtt_6822f5b7980c (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1654030630: Client mqtt_6822f5b7980c closed its connection.
+1654030630: Received PUBLISH from mqtt_9a7fc892eb3f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1654030635: Received PUBLISH from mqtt_9a7fc892eb3f (d0, q0, r0, m0, 'dt/regiao_a/lixeira/qtd_lixo', ... (68 bytes))
+1654030640: Client mqtt_9a7fc892eb3f closed its connection.
+1654030640: mosquitto version 2.0.14 terminating
+1654030640: Saving in-memory database to /mosquitto/data//mosquitto.db.

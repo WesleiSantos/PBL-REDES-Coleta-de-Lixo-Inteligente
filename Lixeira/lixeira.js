@@ -18,7 +18,7 @@ var lixeiraID = null
 var latitude = null
 var longitude = null
 
-for (let i = 0; i < 5; i++) {
+for (let i = 0; i < 1; i++) {
   lixeiraID = Math.floor(1000 * Math.random() + 2);
   latitude = Math.floor(90 * Math.random() + 1);
   longitude = Math.floor(90 * Math.random() + 1);
