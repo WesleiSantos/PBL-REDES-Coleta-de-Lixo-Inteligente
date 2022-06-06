@@ -7,9 +7,11 @@ services:
     build: 
       context: .
       dockerfile: dockerfile.caminhao
-    command: sh -c "npm install mqtt --save && npm start"
+    command: sh -c "npm install && npm start"
+    env_file:
+      - .env
     volumes:
-        - ./Caminhao:/app
+        - .:/app
     
   
 

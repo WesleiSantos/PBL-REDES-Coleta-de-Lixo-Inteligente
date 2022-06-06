@@ -1,8 +1,6 @@
 const mqtt = require("mqtt");
 
-const host = "192.168.2.2";
-const port = "1883";
-
+const {BROKER_HOST, BROKER_PORT, QTD_LIXEIRAS, REGIAO} = process.env;
 
 /*client.subscribe([topic], () => {
   console.log(`Subscribe to topic '${topic}'`);
@@ -18,7 +16,7 @@ var lixeiraID = null
 var latitude = null
 var longitude = null
 
-for (let i = 0; i < 2; i++) {
+for (let i = 0; i < QTD_LIXEIRAS; i++) {
   lixeiraID = Math.floor(1000 * Math.random() + 2);
   latitude = Math.floor(90 * Math.random() + 1);
   longitude = Math.floor(90 * Math.random() + 1);
@@ -27,12 +25,9 @@ for (let i = 0; i < 2; i++) {
 
 function create_lixeira(id, latitude, longitude) {
   const clientId = `mqtt_${Math.random().toString(16).slice(3)}`;
-  const connectUrl = `mqtt://${host}:${port}`;
-  let client = null;
-  //let qtd_lixeira = 10;
-  let regiao = "a";
+  const connectUrl = `mqtt://${BROKER_HOST}:${BROKER_PORT}`;
 
-  client = mqtt.connect(connectUrl, {
+  const client = mqtt.connect(connectUrl, {
     clientId,
     clean: true,
     connectTimeout: 4000,
@@ -62,16 +57,14 @@ function create_lixeira(id, latitude, longitude) {
     console.log("Client is currently offline");
   });
 
-
-
   var payload = {
     id,
-    regiao,
+    regiao:REGIAO,
     capacidade: 0.0,
     longitude,
     latitude,
   };
-  const topic = `dt/regiao_${regiao}/lixeira/qtd_lixo`;
+  const topic = `dt/regiao_${REGIAO}/lixeira/qtd_lixo`;
 
   client.on("connect", () => {
     console.log("Connected");

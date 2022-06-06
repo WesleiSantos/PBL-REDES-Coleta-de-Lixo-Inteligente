@@ -5,20 +5,22 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const RedisClient = require('./services/RedisClient');
+const Utils = require('./services/Utils');
 
 rejson(redis);
-
 require('dotenv').config();
 
-//const { REDIS_HOST, REDIS_PORT, PORT } = process.env;
-const REDIS_HOST= '192.168.2.5'
-const REDIS_PORT= '6379'
-const PORT= '3000'
+const { REDIS_HOST, REDIS_PORT, BROKER_HOST, BROKER_PORT, PORT, REGIAO } = process.env;
 
+//REDIS
+const clientRedis = redis.createClient({
+  url: `redis://${REDIS_HOST}:${REDIS_PORT}`
+});
+const redisClientService = new RedisClient(clientRedis);
+const util = new Utils(redisClientService);
 
-console.log( REDIS_HOST, REDIS_PORT)
+//EXPRESS
 const app = express();
-
 app.use(
     cors({
         origin(origin, callback) {
@@ -28,45 +30,23 @@ app.use(
     })
 );
 
-//REDIS
-const clientRedis = redis.createClient({
-  url: `redis://${REDIS_HOST}:${REDIS_PORT}`
-});
-
-const redisClientService = new RedisClient(clientRedis);
-
 app.set('redisClientService', redisClientService);
-
-// Disable client's AUTH command.
-/*clientRedis['auth'] = null;
-clientRedis.connect();
-
-clientRedis.on('error', (err) => console.log('Redis Client Error', err));
-clientRedis.on('connect', function() {
-  console.log('Connected!');
-});*/
+app.set('utils', util);
 
 app.use(bodyParser.json());
 const router = require('./routes')(app);
 app.use('/api', router);
-
 const portApp = PORT || 3000;
-
 app.listen(portApp, () => {
     console.log(`App listening on port ${portApp}`);
 });
 
-
-
 //MQTT
 var mqtt = require("mqtt");
 var list = [];
-const topicLixeira = "dt/regiao_a/lixeira/qtd_lixo";
-
-const host = "192.168.2.2";
-const port = "1883";
+const topicLixeira = `dt/regiao_${REGIAO}/lixeira/qtd_lixo`;
 const clientId = `mqtt_${Math.random().toString(16).slice(3)}`;
-const connectUrl = `mqtt://${host}:${port}`;
+const connectUrl = `mqtt://${BROKER_HOST}:${BROKER_PORT}`;
 let client = null;
 
 client = mqtt.connect(connectUrl, {
@@ -106,39 +86,15 @@ client.on("connect", function () {
   });
 });
 
-
-//clientRedis.json.set('lixeiras',`$`, {lixeiras:[]})
 client.on("message", function (topic, message) {
-  //console.log("Received Message:", topic, message.toString());
+  console.log("Received Message:", topic, message.toString());
+  var json = JSON.parse(message.toString());
+  redisClientService.jsonSet(`lixeira:${json.id}`, '.',JSON.stringify(json));
   if (topic == topicLixeira) {
-    var json = JSON.parse(message.toString());
-    redisClientService.jsonSet(`lixeira:${json.id}`, '.',JSON.stringify(json));
-    //console.log("Received Message:", topic, message.toString());
-    //clientRedis.json.set(`lixeira:lx__${json.id}`, `$`,json);
-    //clientRedis.json.ARRAPPEND('lixeiras',`.lixeiras`,json);
-    /*clientRedis.scan('lixeira:*').then(data=>{
-      console.log(data)
+    util.ordenaLixeiras().then(data =>{
+      let lixeirasList = data;
+      //mandar pra o caminhão
     })
-    let test = clientRedis.json.get(`lixeira:lx__*`).then(data=>{
-      console.log(data)
-    });*/
-    /*
-    if (list.length == 0) {
-      var json = JSON.parse(message.toString());
-      console.log("Received Message:", topic, message.toString());
-      //console.log(json.id);
-      //list.push(json.id);
-      //console.log(list);
-    } else {
-      var json = JSON.parse(message.toString());
-
-      if (list.find((item) => item == json.id)) {
-        console.log(message.toString());
-      } else {
-        var json = JSON.parse(message.toString());
-      //list.push(json.id);
-        //console.log(list);
-      }
-    }*/
   }
+  
 });

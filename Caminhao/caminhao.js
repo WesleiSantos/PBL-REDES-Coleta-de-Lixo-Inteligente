@@ -1,5 +1,12 @@
 var mqtt = require("mqtt");
 
+console.log(process.env.BROKER_HOST)
+
+const BROKER_HOST = JSON.parse(process.env.BROKER_HOST);
+const BROKER_PORT = JSON.parse(process.env.BROKER_PORT);
+
+console.log(BROKER_HOST[0], BROKER_PORT);
+
 // Variables
 var list = [];
 let regiao = 'a';

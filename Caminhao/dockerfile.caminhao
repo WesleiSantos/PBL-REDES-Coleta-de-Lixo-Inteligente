@@ -1,4 +1,2 @@
 FROM node:18.1.0-slim
 WORKDIR /app
-VOLUME [ "./Caminhao" ]
-RUN npm install mqtt --save
