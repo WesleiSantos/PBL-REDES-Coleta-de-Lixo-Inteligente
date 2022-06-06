@@ -1,0 +1,15 @@
+
+services:
+  caminhao:
+    image: node
+    tty: true        # docker run -t
+    restart: on-failure
+    build: 
+      context: .
+      dockerfile: dockerfile.caminhao
+    command: sh -c "npm install mqtt --save && npm start"
+    volumes:
+        - ./Caminhao:/app
+    
+  
+

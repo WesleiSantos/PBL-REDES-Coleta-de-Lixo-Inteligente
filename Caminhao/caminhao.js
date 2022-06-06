@@ -3,7 +3,7 @@ var mqtt = require("mqtt");
 // Variables
 var list = [];
 let regiao = 'a';
-const host = "192.168.1.2";
+const host = "192.168.2.2";
 const port = "1883";
 const clientId = `mqtt_${Math.random().toString(16).slice(3)}`;
 const connectUrl = `mqtt://${host}:${port}`;

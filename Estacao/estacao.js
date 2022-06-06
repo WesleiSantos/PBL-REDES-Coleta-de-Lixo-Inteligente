@@ -1,8 +1,24 @@
+//REDIS
+var redis = require("redis");
+
+const clientRedis = redis.createClient({
+  url: 'redis://192.168.2.5:6379'
+});
+// Disable client's AUTH command.
+clientRedis['auth'] = null;
+clientRedis.connect();
+
+clientRedis.on('error', (err) => console.log('Redis Client Error', err));
+clientRedis.on('connect', function() {
+  console.log('Connected!');
+});
+
+//MQTT
 var mqtt = require("mqtt");
 var list = [];
 const topicLixeira = "dt/regiao_a/lixeira/qtd_lixo";
 
-const host = "192.168.1.2";
+const host = "192.168.2.2";
 const port = "1883";
 const clientId = `mqtt_${Math.random().toString(16).slice(3)}`;
 const connectUrl = `mqtt://${host}:${port}`;
@@ -45,11 +61,21 @@ client.on("connect", function () {
   });
 });
 
+
+clientRedis.json.set('lixeiras',`$`, {lixeiras:[]})
 client.on("message", function (topic, message) {
   //console.log("Received Message:", topic, message.toString());
   if (topic == topicLixeira) {
     var json = JSON.parse(message.toString());
     console.log("Received Message:", topic, message.toString());
+    //clientRedis.json.set(`lixeira:lx__${json.id}`, `$`,json);
+    //clientRedis.json.ARRAPPEND('lixeiras',`.lixeiras`,json);
+    /*clientRedis.scan('lixeira:*').then(data=>{
+      console.log(data)
+    })*/
+    let test = clientRedis.json.get(`lixeira:lx__*`).then(data=>{
+      console.log(data)
+    });
     /*
     if (list.length == 0) {
       var json = JSON.parse(message.toString());

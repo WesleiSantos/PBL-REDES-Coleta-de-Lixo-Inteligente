@@ -4,13 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node estacao.js",
+    "start": "nodemon estacao.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mqtt": "^4.3.7"
+    "mqtt": "^4.3.7",
+    "redis": "^4.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
   }
 }
