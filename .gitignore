@@ -6,3 +6,10 @@ Broker/log
 Broker/data
 
 *.log
+
+
+node_modules
+package-lock.json
+.env
+**/.DS_Store
+.idea/
