@@ -51,6 +51,8 @@ services:
     networks:
         my-network: 
           ipv4_address: 192.168.2.4
+    ports: 
+      - 3000:3000
     volumes:
         - ./Estacao:/app
     depends_on:
@@ -64,6 +66,7 @@ services:
     build: 
       context: ./Estacao
       dockerfile: dockerfile.db
+    command: redis-server --loadmodule "/usr/lib/redis/modules/rejson.so"
     networks:
         my-network: 
           ipv4_address: 192.168.2.5
