@@ -20,6 +20,11 @@ const clientRedis = redis.createClient({
 const redisClientService = new RedisClient(clientRedis);
 const util = new Utils(redisClientService);
 
+//limpar banco
+util.limpaBD().then(data=>{
+    console.log(data);
+});
+
 //***************************    EXPRESS    ********************************//
 const app = express();
 app.use(
@@ -35,7 +40,7 @@ app.set('utils', util);
 app.use(bodyParser.json());
 const router = require('./routes')(app);
 app.use('/api', router);
-const portApp = PORT || 3000;
+const portApp = PORT;
 app.listen(portApp, () => {
     console.log(`App listening on port ${portApp}`);
 });

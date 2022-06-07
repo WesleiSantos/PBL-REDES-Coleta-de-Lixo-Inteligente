@@ -58,7 +58,7 @@ services:
         my-network-2: 
           ipv4_address: 192.168.3.4
     ports: 
-      - 3001:3000
+      - 3001:3001
     volumes:
         - ../Estacao:/app
     depends_on:

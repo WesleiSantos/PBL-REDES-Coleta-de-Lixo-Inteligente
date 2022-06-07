@@ -40,7 +40,6 @@ class Utils  {
         }
         return "Banco limpo!";
     }
-
 }
 
 module.exports = Utils;

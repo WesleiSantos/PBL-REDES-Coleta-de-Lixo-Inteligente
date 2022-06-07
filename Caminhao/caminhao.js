@@ -1,5 +1,25 @@
 var mqtt = require("mqtt");
+const redis = require("redis");
+const rejson = require("redis-rejson");
+const RedisClient = require("./services/RedisClient");
+const Utils = require("./services/Utils");
 
+rejson(redis);
+
+//***************************    REDIS    ********************************//
+const {REDIS_HOST,REDIS_PORT} = process.env;
+const clientRedis = redis.createClient({
+  url: `redis://${REDIS_HOST}:${REDIS_PORT}`,
+});
+const redisClientService = new RedisClient(clientRedis);
+const util = new Utils(redisClientService);
+
+//limpar banco
+util.limpaBD().then(data=>{
+  console.log(data);
+});
+
+//***************************    DADOS CAMINHÃO    ********************************//
 const topico_lixeira_prioritaria = "dt/lixeira/prioritaria";
 
 var caminhaoID = Math.floor(1000 * Math.random() + 2);
@@ -12,7 +32,6 @@ var payload = {
   longitude: longt,
   latitude: lat,
 };
-
 
 //**********************************  CLIENTE 1 ******************************/
 // Variables
@@ -75,10 +94,11 @@ client_1.on("message", function (topic, message) {
   if (topic == topico_lixeira_prioritaria) {
     console.log("Received Message:", topic, message.toString());
     var json = JSON.parse(message.toString());
-    payload.capacidade =
-      parseFloat(payload.capacidade) + parseFloat(json.quantidade);
-    json.quantidade = 0.0;
-    client_1.publish(topico_limpar_lixeira_1, JSON.stringify(json));
+    redisClientService.jsonSet(
+      `lixeira:${REGIAO_1}`,
+      ".",
+      JSON.stringify(json)
+    );
   }
 });
 
@@ -141,9 +161,31 @@ client_2.on("message", function (topic, message) {
   if (topic == topico_lixeira_prioritaria) {
     console.log("Received Message:", topic, message.toString());
     var json = JSON.parse(message.toString());
-    payload.capacidade =
-      parseFloat(payload.capacidade) + parseFloat(json.quantidade);
-    json.quantidade = 0.0;
-    client_2.publish(topico_limpar_lixeira_2, JSON.stringify(json));
+    redisClientService.jsonSet(
+      `lixeira:${REGIAO_2}`,
+      ".",
+      JSON.stringify(json)
+    );
   }
 });
+
+setInterval(() => {
+  util.ordenaLixeiras().then((data) => {
+    if (data.length > 0) {
+      let lixeirasList = data;
+      console.log("LISTA ORDENADA: ");
+      for (let i = 0; i < lixeirasList.length; i++) {
+        console.log(JSON.stringify(lixeirasList[i]));
+      }
+      let lixeira = data[0];
+      payload.capacidade =
+        parseFloat(payload.capacidade) + parseFloat(lixeira.quantidade);
+      lixeira.quantidade = 0.0;
+      if (lixeira.regiao == REGIAO_1) {
+        client_1.publish(topico_limpar_lixeira_1, JSON.stringify(lixeira));
+      } else {
+        client_2.publish(topico_limpar_lixeira_2, JSON.stringify(lixeira));
+      }
+    }
+  });
+}, 8000);

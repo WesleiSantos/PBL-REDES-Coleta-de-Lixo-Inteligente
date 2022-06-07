@@ -107,7 +107,7 @@ function create_lixeira(id, latitude, longitude) {
 
       client.publish(topic, JSON.stringify(payload));
       console.log("mensagem enviada: " + JSON.stringify(payload));
-    }, 5000);
+    }, 10000);
   });
 
 }

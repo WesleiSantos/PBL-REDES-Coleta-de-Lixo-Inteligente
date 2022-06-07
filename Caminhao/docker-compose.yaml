@@ -1,4 +1,11 @@
-
+version: '3'
+networks:
+  caminhao-network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.4.0/24 
 services:
   caminhao:
     image: node
@@ -8,10 +15,39 @@ services:
       context: .
       dockerfile: dockerfile.caminhao
     command: sh -c "npm install && npm start"
+    networks:
+        caminhao-network: 
+          ipv4_address: 192.168.4.2
     env_file:
       - .env
     volumes:
         - .:/app
-    
+
+  redis:
+    image: redis
+    tty: true        # docker run -t
+    restart: on-failure
+    build: 
+      context: ../Estacao
+      dockerfile: dockerfile.db
+    command: redis-server --loadmodule "/usr/lib/redis/modules/rejson.so"
+    networks:
+        caminhao-network: 
+          ipv4_address: 192.168.4.3
+    ports:
+      - 6381:6379
+
+  redislabs:
+    image: redislabs
+    tty: true        # docker run -t
+    restart: on-failure
+    build: 
+      context: ../Estacao
+      dockerfile: dockerfile.redislabs
+    networks:
+        caminhao-network: 
+          ipv4_address: 192.168.4.4
+    ports:
+      - 8003:8001
   
 
