@@ -15,8 +15,18 @@ class Utils  {
 
                 productList.push(JSON.parse(product));
             }
+            productList.sort(function (a, b) {
+                if (a.capacidade < b.capacidade) {
+                    return 1;
+                }
+                if (a.capacidade > b.capacidade) {
+                    return -1;
+                }
+                // a must be equal to b
+                return 0;
+            });
         }
-        
+
         return productList;
     }
 }

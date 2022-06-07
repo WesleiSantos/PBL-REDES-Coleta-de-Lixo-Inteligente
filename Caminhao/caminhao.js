@@ -20,6 +20,19 @@ let client = null;
 const topico_limpar_lixeira = `cmd/caminhao/regiao_${regiao}/lixeira/esvaziar`;
 const topico_lixeira_prioritaria = "dt/lixeira/prioritaria";
 
+
+
+var caminhaoID = Math.floor(1000 * Math.random() + 2);
+var lat = Math.floor(90 * Math.random() + 1);
+var longt = Math.floor(90 * Math.random() + 1);
+
+var payload = {
+  id: caminhaoID,
+  capacidade: 0.0,
+  longitude: longt,
+  latitude: lat,
+}
+
 // Connect broker mqtt
 client = mqtt.connect(connectUrl, {
   clientId,
@@ -61,12 +74,22 @@ client.on("connect", function () {
   client.subscribe([topico_lixeira_prioritaria], () => {
     console.log(`Subscribe to topic '${topico_lixeira_prioritaria}'`);
   });
+
+
+  setInterval(() => {
+    client.publish("dt/caminhao/posicao", JSON.stringify(payload))
+  }, 5000);
+  
 });
 
 // Receive message
 client.on("message", function (topic, message) {
-  console.log("Received Message:", topic, message.toString());
+  
   if (topic == topico_lixeira_prioritaria) {
-    client.publish(topic, JSON.stringify(payload));
+    console.log("Received Message:", topic, message.toString());
+    var json=JSON.parse(message.toString())
+    payload.capacidade=  parseFloat(payload.capacidade)+ parseFloat(json.quantidade)
+    json.quantidade=0.0
+    client.publish(topico_limpar_lixeira, JSON.stringify(json));
   }
 });

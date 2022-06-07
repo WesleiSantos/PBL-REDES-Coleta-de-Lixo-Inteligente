@@ -2,6 +2,9 @@ const mqtt = require("mqtt");
 
 const {BROKER_HOST, BROKER_PORT, QTD_LIXEIRAS, REGIAO} = process.env;
 
+const topico_coleta = `cmd/lixeiras/regiao_${REGIAO}/lixeira/coleta`;
+
+
 /*client.subscribe([topic], () => {
   console.log(`Subscribe to topic '${topic}'`);
 });*/
@@ -66,7 +69,24 @@ function create_lixeira(id, latitude, longitude) {
   };
   const topic = `dt/regiao_${REGIAO}/lixeira/qtd_lixo`;
 
+  // Receive message
+  client.on("message", function (topic, message) {
+
+    if (topic == topico_coleta) {
+      console.log("Received Message:", topic, message.toString());
+      var json = JSON.parse(message.toString());
+      if (json.id == payload.id) {
+        payload.capacidade=0.0;
+      }
+    }
+  });
+
   client.on("connect", () => {
+
+    client.subscribe([topico_coleta], () => {
+      console.log(`Subscribe to topic '${topico_coleta}'`);
+    });
+
     console.log("Connected");
 
     setInterval(() => {
