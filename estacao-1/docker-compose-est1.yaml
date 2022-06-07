@@ -1,0 +1,95 @@
+version: "3"
+networks:
+  my-network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.2.0/24 
+services:
+  mosquitto:
+      image: mosquitto
+      tty: true        # docker run -t
+      restart: on-failure
+      build: 
+        context: ../Broker
+        dockerfile: dockerfile.broker
+      ports: 
+        - 9001:9001
+        - 1883:1883
+      networks:
+        my-network:
+          ipv4_address: 192.168.2.2
+      volumes:
+        - ../Broker/config:/mosquitto/config
+        - ../Broker/log:/mosquitto/log
+        - ../Broker/data:/mosquitto/data
+
+  lixeira:
+    image: node
+    tty: true        # docker run -t
+    restart: on-failure
+    build: 
+      context: ../Lixeira
+      dockerfile: dockerfile.lixeira
+    command: sh -c "npm install && npm install nodemon -D && npm start"
+    env_file:
+      - .est1.env
+    networks:
+        my-network: 
+          ipv4_address: 192.168.2.3
+    volumes:
+        - ../Lixeira:/app
+    depends_on:
+      - mosquitto
+
+  estacao:
+    image: node
+    tty: true        # docker run -t
+    restart: on-failure
+    build: 
+      context: ../Estacao
+      dockerfile: dockerfile.estacao
+    command: sh -c "npm install && npm install nodemon -D && npm start"
+    env_file:
+      - .est1.env
+    networks:
+        my-network: 
+          ipv4_address: 192.168.2.4
+    ports: 
+      - 3000:3000
+    volumes:
+        - ../Estacao:/app
+    depends_on:
+      - lixeira
+      - redis
+
+  redis:
+    image: redis
+    tty: true        # docker run -t
+    restart: on-failure
+    build: 
+      context: ../Estacao
+      dockerfile: dockerfile.db
+    command: redis-server --loadmodule "/usr/lib/redis/modules/rejson.so"
+    networks:
+        my-network: 
+          ipv4_address: 192.168.2.5
+    ports:
+      - 6379:6379
+
+  redislabs:
+    image: redislabs
+    tty: true        # docker run -t
+    restart: on-failure
+    build: 
+      context: ../Estacao
+      dockerfile: dockerfile.redislabs
+    networks:
+        my-network: 
+          ipv4_address: 192.168.2.6
+    ports:
+      - 8001:8001
+    
+  
+

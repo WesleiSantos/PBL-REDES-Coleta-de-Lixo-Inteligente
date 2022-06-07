@@ -99,8 +99,8 @@ client.on('connect', function () {
 client.on('message', function (topic, message) {
     console.log('Received Message:', topic, message.toString());
     var json = JSON.parse(message.toString());
-    redisClientService.jsonSet(`lixeira:${json.id}`, '.', JSON.stringify(json));
     if (topic == topicLixeira) {
+        redisClientService.jsonSet(`lixeira:${json.id}`, '.', JSON.stringify(json));
         util.ordenaLixeiras().then(data => {
             let lixeirasList = data;
             console.log('LISTA ORDENADA: ');

@@ -74,8 +74,8 @@ function create_lixeira(id, latitude, longitude) {
 
     if (topic == topico_coleta) {
       console.log("Received Message:", topic, message.toString());
-      var json = JSON.parse(message.toString());
-      if (json.id == payload.id) {
+      var json = JSON.parse(message);
+      if (json.id == payload.id && json.regiao == payload.regiao) {
         payload.capacidade=0.0;
       }
     }
