@@ -123,9 +123,5 @@ client.on('message', function (topic, message) {
         caminhao_posicao_latitude = json.latitude;
         caminhao_posicao_longitude = json.longitude;
     }
-
-    if (topic == topico_limpar_lixeira) {
-        console.log('====== COLETAR ===== ');
-        client.publish(topico_coleta, message);
-    }
+    
 });

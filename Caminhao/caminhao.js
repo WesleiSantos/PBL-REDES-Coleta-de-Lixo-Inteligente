@@ -22,6 +22,7 @@ util.limpaBD().then(data=>{
 //***************************    DADOS CAMINHÃO    ********************************//
 const topico_lixeira_prioritaria = "dt/lixeira/prioritaria";
 
+
 var caminhaoID = Math.floor(1000 * Math.random() + 2);
 var lat = Math.floor(90 * Math.random() + 1);
 var longt = Math.floor(90 * Math.random() + 1);
@@ -41,6 +42,7 @@ const connectUrl_1 = `mqtt://${BROKER_HOST_1}:${BROKER_PORT_1}`;
 
 // Tópicos
 const topico_limpar_lixeira_1 = `cmd/caminhao/regiao_${REGIAO_1}/lixeira/esvaziar`;
+const topico_resposta_lixeira1 = `dt/caminhao/regiao_${REGIAO_1}/lixeira/resposta`;
 
 // Connect broker mqtt
 let client_1 = mqtt.connect(connectUrl_1, {
@@ -83,6 +85,9 @@ client_1.on("connect", function () {
   client_1.subscribe([topico_lixeira_prioritaria], () => {
     console.log(`Subscribe to topic '${topico_lixeira_prioritaria}'`);
   });
+  client_1.subscribe([topico_resposta_lixeira1], () => {
+    console.log(`Subscribe to topic '${topico_lixeira_prioritaria}'`);
+  });
 
   setInterval(() => {
     client_1.publish("dt/caminhao/posicao", JSON.stringify(payload));
@@ -100,6 +105,9 @@ client_1.on("message", function (topic, message) {
       JSON.stringify(json)
     );
   }
+  if(topic== topico_resposta_lixeira1){
+    console.log("RESPOSTA LIXEIRA ", topic, message.toString());
+  }
 });
 
 //**********************************  CLIENTE 2 ******************************/
@@ -108,6 +116,7 @@ const { BROKER_HOST_2, BROKER_PORT_2, REGIAO_2 } = process.env;
 const clientId_2 = `mqtt_${Math.random().toString(16).slice(3)}`;
 const connectUrl_2 = `mqtt://${BROKER_HOST_2}:${BROKER_PORT_2}`;
 const topico_limpar_lixeira_2 = `cmd/caminhao/regiao_${REGIAO_2}/lixeira/esvaziar`;
+const topico_resposta_lixeira2 = `dt/caminhao/regiao_${REGIAO_2}/lixeira/resposta`;
 
 // Connect broker mqtt
 let client_2 = mqtt.connect(connectUrl_2, {
@@ -150,6 +159,9 @@ client_2.on("connect", function () {
   client_2.subscribe([topico_lixeira_prioritaria], () => {
     console.log(`Subscribe to topic '${topico_lixeira_prioritaria}'`);
   });
+  client_2.subscribe([topico_resposta_lixeira2], () => {
+    console.log(`Subscribe to topic '${topico_lixeira_prioritaria}'`);
+  });
 
   setInterval(() => {
     client_2.publish("dt/caminhao/posicao", JSON.stringify(payload));
@@ -167,6 +179,9 @@ client_2.on("message", function (topic, message) {
       JSON.stringify(json)
     );
   }
+  if(topic== topico_resposta_lixeira2){
+    console.log("RESPOSTA LIXEIRA ", topic, message.toString());
+  }
 });
 
 setInterval(() => {
@@ -181,9 +196,12 @@ setInterval(() => {
       payload.capacidade =
         parseFloat(payload.capacidade) + parseFloat(lixeira.quantidade);
       lixeira.quantidade = 0.0;
+      
       if (lixeira.regiao == REGIAO_1) {
+        lixeira.topico= topico_resposta_lixeira1
         client_1.publish(topico_limpar_lixeira_1, JSON.stringify(lixeira));
       } else {
+        lixeira.topico= topico_resposta_lixeira2
         client_2.publish(topico_limpar_lixeira_2, JSON.stringify(lixeira));
       }
     }

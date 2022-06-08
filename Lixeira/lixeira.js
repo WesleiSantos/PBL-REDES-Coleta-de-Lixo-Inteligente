@@ -2,7 +2,7 @@ const mqtt = require("mqtt");
 
 const {BROKER_HOST, BROKER_PORT, QTD_LIXEIRAS, REGIAO} = process.env;
 
-const topico_coleta = `cmd/lixeiras/regiao_${REGIAO}/lixeira/coleta`;
+const topico_coleta = `cmd/caminhao/regiao_${REGIAO}/lixeira/esvaziar`;
 
 
 /*client.subscribe([topic], () => {
@@ -77,6 +77,8 @@ function create_lixeira(id, latitude, longitude) {
       var json = JSON.parse(message);
       if (json.id == payload.id && json.regiao == payload.regiao) {
         payload.capacidade=0.0;
+        console.log(JSON.stringify(json.topico))
+        client.publish(json.topico, JSON.stringify(payload))
       }
     }
   });
