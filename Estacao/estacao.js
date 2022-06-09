@@ -11,7 +11,14 @@ const mqtt = require('mqtt');
 rejson(redis);
 require('dotenv').config();
 
-const { REDIS_HOST, REDIS_PORT, BROKER_HOST, BROKER_PORT, PORT, REGIAO } = process.env;
+const {
+    REDIS_HOST,
+    REDIS_PORT,
+    BROKER_HOST,
+    BROKER_PORT,
+    PORT,
+    REGIAO
+} = process.env;
 
 //***************************    REDIS    ********************************//
 const clientRedis = redis.createClient({
@@ -21,7 +28,7 @@ const redisClientService = new RedisClient(clientRedis);
 const util = new Utils(redisClientService);
 
 //limpar banco
-util.limpaBD().then(data=>{
+util.limpaBD().then(data => {
     console.log(data);
 });
 
@@ -65,8 +72,14 @@ const topicLixeira = `dt/regiao_${REGIAO}/lixeira/qtd_lixo`;
 const topico_lixeira_prioritaria = 'dt/lixeira/prioritaria';
 const topico_posicao_caminhao = 'dt/caminhao/posicao';
 const topico_limpar_lixeira = `cmd/caminhao/regiao_${REGIAO}/lixeira/esvaziar`;
-const topico_coleta = `cmd/lixeiras/regiao_${REGIAO}/lixeira/coleta`;
 
+//CALCULAR A DISTANCIA ENTRE A LIXEIRA E O CAMINHAO
+function calcularDistancia(latitude_cam, longitude_cam, latitude_lix, longitude_lix) {
+    let latitude_caminhao_lixeira = Math.pow(parseInt(latitude_cam) - parseInt(latitude_lix), 2);
+    let longitude_caminhao_lixeira = Math.pow(parseInt(longitude_cam) - parseInt(longitude_lix), 2);
+
+    return Math.sqrt(latitude_caminhao_lixeira + longitude_caminhao_lixeira);
+}
 
 
 client.on('error', function (err) {
@@ -101,11 +114,44 @@ client.on('connect', function () {
     });
 });
 
+//RECEBE MENSAGENS DOS  TÓPICOS QUE ESTAO INSCRITOS
 client.on('message', function (topic, message) {
     console.log('Received Message:', topic, message.toString());
     var json = JSON.parse(message.toString());
     if (topic == topicLixeira) {
+        json.distancia = calcularDistancia(caminhao_posicao_latitude, caminhao_posicao_longitude, json.latitude, json.longitude).toFixed(2)
         redisClientService.jsonSet(`lixeira:${json.id}`, '.', JSON.stringify(json));
+
+        /*
+        util.ordenaLixeiras().then(data => {
+            let list_ordena_capacidade = data;
+            console.log('LISTA ORDENADA: ');
+            for (let i = 0; i < list_ordena_capacidade.length; i++) {
+                console.log(JSON.stringify(list_ordena_capacidade[i]));
+            }
+        });
+        
+        util.ordenaLixeiras_distancia().then(data => {
+            let list_ordena_distancia = data;
+            if (list_ordena_capacidade[0].id == list_ordena_distancia[0].id) {
+                console.log("--SEND: ", JSON.stringify(list_ordena_capacidade[0]))
+                client.publish(topico_lixeira_prioritaria, JSON.stringify(list_ordena_capacidade[0]));
+            } else {
+                let a = list_ordena_capacidade[0].capacidade;
+                let b = list_ordena_distancia[0].capacidade;
+                let x = (100 * b) / a;
+                if (x > 50) { //se a mais próxima possui mais de 50% em relação a lixeira mais critica
+                    console.log("---SEND: ", JSON.stringify(list_ordena_distancia[0]))
+                    client.publish(topico_lixeira_prioritaria, JSON.stringify(list_ordena_distancia[0]));
+                } else {
+                    console.log("---SEND: ", JSON.stringify(list_ordena_capacidade[0]))
+                    client.publish(topico_lixeira_prioritaria, JSON.stringify(list_ordena_capacidade[0]));
+                }
+            }
+        });
+*/
+
+        
         util.ordenaLixeiras().then(data => {
             let lixeirasList = data;
             console.log('LISTA ORDENADA: ');
@@ -118,10 +164,10 @@ client.on('message', function (topic, message) {
     }
     if (topic == topico_posicao_caminhao) {
         var json = JSON.parse(message.toString());
-        console.log('[CAMINHAO POSITION]:', message.toString());
+        console.log('[CAMINHAO]:', message.toString());
 
         caminhao_posicao_latitude = json.latitude;
         caminhao_posicao_longitude = json.longitude;
     }
-    
+
 });

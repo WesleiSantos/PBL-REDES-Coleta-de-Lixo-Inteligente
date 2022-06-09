@@ -7,7 +7,10 @@ const Utils = require("./services/Utils");
 rejson(redis);
 
 //***************************    REDIS    ********************************//
-const {REDIS_HOST,REDIS_PORT} = process.env;
+const {
+  REDIS_HOST,
+  REDIS_PORT
+} = process.env;
 const clientRedis = redis.createClient({
   url: `redis://${REDIS_HOST}:${REDIS_PORT}`,
 });
@@ -15,12 +18,13 @@ const redisClientService = new RedisClient(clientRedis);
 const util = new Utils(redisClientService);
 
 //limpar banco
-util.limpaBD().then(data=>{
+util.limpaBD().then(data => {
   console.log(data);
 });
 
 //***************************    DADOS CAMINHÃO    ********************************//
 const topico_lixeira_prioritaria = "dt/lixeira/prioritaria";
+const topico_posicao_caminhao = "dt/caminhao/posicao";
 
 
 var caminhaoID = Math.floor(1000 * Math.random() + 2);
@@ -36,7 +40,11 @@ var payload = {
 
 //**********************************  CLIENTE 1 ******************************/
 // Variables
-const { BROKER_HOST_1, BROKER_PORT_1, REGIAO_1 } = process.env;
+const {
+  BROKER_HOST_1,
+  BROKER_PORT_1,
+  REGIAO_1
+} = process.env;
 const clientId_1 = `mqtt_${Math.random().toString(16).slice(3)}`;
 const connectUrl_1 = `mqtt://${BROKER_HOST_1}:${BROKER_PORT_1}`;
 
@@ -90,7 +98,7 @@ client_1.on("connect", function () {
   });
 
   setInterval(() => {
-    client_1.publish("dt/caminhao/posicao", JSON.stringify(payload));
+    client_1.publish([topico_posicao_caminhao], JSON.stringify(payload));
   }, 5000);
 });
 
@@ -105,14 +113,18 @@ client_1.on("message", function (topic, message) {
       JSON.stringify(json)
     );
   }
-  if(topic== topico_resposta_lixeira1){
+  if (topic == topico_resposta_lixeira1) {
     console.log("RESPOSTA LIXEIRA ", topic, message.toString());
   }
 });
 
 //**********************************  CLIENTE 2 ******************************/
 // Variables
-const { BROKER_HOST_2, BROKER_PORT_2, REGIAO_2 } = process.env;
+const {
+  BROKER_HOST_2,
+  BROKER_PORT_2,
+  REGIAO_2
+} = process.env;
 const clientId_2 = `mqtt_${Math.random().toString(16).slice(3)}`;
 const connectUrl_2 = `mqtt://${BROKER_HOST_2}:${BROKER_PORT_2}`;
 const topico_limpar_lixeira_2 = `cmd/caminhao/regiao_${REGIAO_2}/lixeira/esvaziar`;
@@ -179,7 +191,7 @@ client_2.on("message", function (topic, message) {
       JSON.stringify(json)
     );
   }
-  if(topic== topico_resposta_lixeira2){
+  if (topic == topico_resposta_lixeira2) {
     console.log("RESPOSTA LIXEIRA ", topic, message.toString());
   }
 });
@@ -189,15 +201,18 @@ setInterval(() => {
     if (data.length > 0) {
       let lixeira = data[0];
       console.log(`COLETAR LIXEIRA:${JSON.stringify(lixeira)}`)
-      payload.capacidade =
-        parseFloat(payload.capacidade) + parseFloat(lixeira.quantidade);
-      lixeira.quantidade = 0.0;
       
+      payload.capacidade = payload.capacidade+lixeira.capacidade;
+      lixeira.capacidade = 0.0;
+
+      payload.latitude = lixeira.latitude
+      payload.longitude = lixeira.longitude
+
       if (lixeira.regiao == REGIAO_1) {
-        lixeira.topico= topico_resposta_lixeira1
+        lixeira.topico = topico_resposta_lixeira1
         client_1.publish(topico_limpar_lixeira_1, JSON.stringify(lixeira));
       } else {
-        lixeira.topico= topico_resposta_lixeira2
+        lixeira.topico = topico_resposta_lixeira2
         client_2.publish(topico_limpar_lixeira_2, JSON.stringify(lixeira));
       }
     }

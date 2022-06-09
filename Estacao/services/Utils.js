@@ -29,6 +29,31 @@ class Utils  {
 
         return productList;
     }
+    /*
+    async ordenaLixeiras_distancia() {
+        const productKeys = await this.redisClientService.scan('lixeira:*');
+        const productList = [];
+
+        if (productKeys.length) {
+            for (const key of productKeys) {
+                const product = await this.redisClientService.jsonGet(key);
+
+                productList.push(JSON.parse(product));
+            }
+            productList.sort(function (a, b) {
+                if (a.distancia < b.distancia) {
+                    return 1;
+                }
+                if (a.distancia > b.distancia) {
+                    return -1;
+                }
+                // a must be equal to b
+                return 0;
+            });
+        }
+
+        return productList;
+    }*/
 
     async limpaBD() {
         const productKeys = await this.redisClientService.scan('lixeira:*');
