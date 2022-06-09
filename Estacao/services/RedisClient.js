@@ -1,4 +1,6 @@
-const { promisify } = require('util');
+const {
+    promisify
+} = require('util');
 
 class RedisClient {
     constructor(redisClient) {

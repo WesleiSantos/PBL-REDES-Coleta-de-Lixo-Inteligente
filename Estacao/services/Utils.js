@@ -1,10 +1,16 @@
-const { promisify } = require('util');
+const {
+    promisify
+} = require('util');
 
-class Utils  {
+class Utils {
     constructor(redisClientService) {
         this.redisClientService = redisClientService;
     }
 
+    /**
+     * ORDENA OS ELEMENTOS DE ACORDO COM SUA CAPACIDADE EM ORDEM DESCRECENTE.
+     * @returns a lista com os elementos ja ordenados.
+     */
     async ordenaLixeiras() {
         const productKeys = await this.redisClientService.scan('lixeira:*');
         const productList = [];
@@ -29,7 +35,11 @@ class Utils  {
 
         return productList;
     }
-    /*
+
+    /**
+     * ORDENADA OS ELEMENTOS PELA DISTANCIA EM ORDEM ASCENDENTE. 
+     * @returns os elementos já ordenados.
+     */
     async ordenaLixeiras_distancia() {
         const productKeys = await this.redisClientService.scan('lixeira:*');
         const productList = [];
@@ -41,10 +51,10 @@ class Utils  {
                 productList.push(JSON.parse(product));
             }
             productList.sort(function (a, b) {
-                if (a.distancia < b.distancia) {
+                if (a.distancia > b.distancia) {
                     return 1;
                 }
-                if (a.distancia > b.distancia) {
+                if (a.distancia < b.distancia) {
                     return -1;
                 }
                 // a must be equal to b
@@ -53,7 +63,7 @@ class Utils  {
         }
 
         return productList;
-    }*/
+    }
 
     async limpaBD() {
         const productKeys = await this.redisClientService.scan('lixeira:*');
@@ -69,4 +79,3 @@ class Utils  {
 }
 
 module.exports = Utils;
-

@@ -73,7 +73,15 @@ const topico_lixeira_prioritaria = 'dt/lixeira/prioritaria';
 const topico_posicao_caminhao = 'dt/caminhao/posicao';
 const topico_limpar_lixeira = `cmd/caminhao/regiao_${REGIAO}/lixeira/esvaziar`;
 
-//CALCULAR A DISTANCIA ENTRE A LIXEIRA E O CAMINHAO
+
+/**
+ * CALCULAR A DISTANCIA ENTRE A LIXEIRA E O CAMINHAO
+ * @param {*} latitude_cam latitude do caminhao
+ * @param {*} longitude_cam  longitude do caminhao
+ * @param {*} latitude_lix latitude da lixeira
+ * @param {*} longitude_lix longitude da lixeira
+ * @returns o cálculo da distancia entre os dois pontos.
+ */
 function calcularDistancia(latitude_cam, longitude_cam, latitude_lix, longitude_lix) {
     let latitude_caminhao_lixeira = Math.pow(parseInt(latitude_cam) - parseInt(latitude_lix), 2);
     let longitude_caminhao_lixeira = Math.pow(parseInt(longitude_cam) - parseInt(longitude_lix), 2);
@@ -89,10 +97,16 @@ client.on('error', function (err) {
     }
 });
 
+/**
+ * finaliza a conexao
+ */
 client.on('close', function () {
     console.log('Connection closed by client');
 });
 
+/**
+ * reconecta o cliente
+ */
 client.on('reconnect', function () {
     console.log('Client trying a reconnection');
 });
@@ -101,6 +115,9 @@ client.on('offline', function () {
     console.log('Client is currently offline');
 });
 
+/**
+ * A ESTAÇÃO SE INSCREVE NOS DETERMINADOS TÓPICOS
+ */
 client.on('connect', function () {
     console.log('Conectado ao MQTT');
     client.subscribe([topicLixeira], () => {
@@ -114,7 +131,9 @@ client.on('connect', function () {
     });
 });
 
-//RECEBE MENSAGENS DOS  TÓPICOS QUE ESTAO INSCRITOS
+/**
+ * RECEBE MENSAGENS DOS  TÓPICOS QUE ESTAO INSCRITOS 
+ */
 client.on('message', function (topic, message) {
     console.log('Received Message:', topic, message.toString());
     var json = JSON.parse(message.toString());
@@ -122,46 +141,36 @@ client.on('message', function (topic, message) {
         json.distancia = calcularDistancia(caminhao_posicao_latitude, caminhao_posicao_longitude, json.latitude, json.longitude).toFixed(2)
         redisClientService.jsonSet(`lixeira:${json.id}`, '.', JSON.stringify(json));
 
-        /*
+        //faz a ordenação das lixeiras da mais crítica à vazia.
         util.ordenaLixeiras().then(data => {
             let list_ordena_capacidade = data;
             console.log('LISTA ORDENADA: ');
             for (let i = 0; i < list_ordena_capacidade.length; i++) {
                 console.log(JSON.stringify(list_ordena_capacidade[i]));
             }
-        });
-        
-        util.ordenaLixeiras_distancia().then(data => {
-            let list_ordena_distancia = data;
-            if (list_ordena_capacidade[0].id == list_ordena_distancia[0].id) {
-                console.log("--SEND: ", JSON.stringify(list_ordena_capacidade[0]))
-                client.publish(topico_lixeira_prioritaria, JSON.stringify(list_ordena_capacidade[0]));
-            } else {
-                let a = list_ordena_capacidade[0].capacidade;
-                let b = list_ordena_distancia[0].capacidade;
-                let x = (100 * b) / a;
-                if (x > 50) { //se a mais próxima possui mais de 50% em relação a lixeira mais critica
-                    console.log("---SEND: ", JSON.stringify(list_ordena_distancia[0]))
-                    client.publish(topico_lixeira_prioritaria, JSON.stringify(list_ordena_distancia[0]));
-                } else {
-                    console.log("---SEND: ", JSON.stringify(list_ordena_capacidade[0]))
+
+            //ordena-as pela distancia entre elas e o caminhao
+            util.ordenaLixeiras_distancia().then(data => {
+                let list_ordena_distancia = data;
+
+                //se a lixeira que é a mais crítica for a mais próxima do caminhao, envia ela.
+                if (list_ordena_capacidade[0].id == list_ordena_distancia[0].id) {
                     client.publish(topico_lixeira_prioritaria, JSON.stringify(list_ordena_capacidade[0]));
+                } else {
+                    let a = list_ordena_capacidade[0].capacidade;
+                    let b = list_ordena_distancia[0].capacidade;
+                    let x = (100 * b) / a;
+                    if (x > 50) { //se a mais próxima possui mais de 50% em relação a lixeira mais critica
+                        client.publish(topico_lixeira_prioritaria, JSON.stringify(list_ordena_distancia[0]));
+                    } else {
+                        client.publish(topico_lixeira_prioritaria, JSON.stringify(list_ordena_capacidade[0]));
+                    }
                 }
-            }
-        });
-*/
+            });
 
-        
-        util.ordenaLixeiras().then(data => {
-            let lixeirasList = data;
-            console.log('LISTA ORDENADA: ');
-            for (let i = 0; i < lixeirasList.length; i++) {
-                console.log(JSON.stringify(lixeirasList[i]));
-            }
-
-            client.publish(topico_lixeira_prioritaria, JSON.stringify(lixeirasList[0]));
         });
     }
+    //tópico para receber os dados do caminhao e guardar sua posição.
     if (topic == topico_posicao_caminhao) {
         var json = JSON.parse(message.toString());
         console.log('[CAMINHAO]:', message.toString());

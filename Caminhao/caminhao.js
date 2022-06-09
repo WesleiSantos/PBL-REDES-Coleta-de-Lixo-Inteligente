@@ -87,7 +87,9 @@ client_1.on("offline", function () {
   console.log("Client is currently offline");
 });
 
-//Connect client
+/**
+ * CONECT CLIENTE - SE INSCREVE NOS TÓPICOS
+ */
 client_1.on("connect", function () {
   console.log("Conectado ao MQTT");
   client_1.subscribe([topico_lixeira_prioritaria], () => {
@@ -102,7 +104,9 @@ client_1.on("connect", function () {
   }, 5000);
 });
 
-// Receive message
+/**
+ * RECEBE AS MENSAGENS DOS TÓPICOS EM QUE FOI INSCRITO.
+ */
 client_1.on("message", function (topic, message) {
   if (topic == topico_lixeira_prioritaria) {
     //console.log("Received Message:", topic, message.toString());
@@ -160,7 +164,7 @@ client_2.on("reconnect", function () {
   console.log("Client trying a reconnection");
 });
 
-// Connction offline
+// Connection offline
 client_2.on("offline", function () {
   console.log("Client is currently offline");
 });
@@ -180,7 +184,9 @@ client_2.on("connect", function () {
   }, 5000);
 });
 
-// Receive message
+/**
+ * RECEBE AS MENSAGENS DOS TÓPICOS EM QUE FOI INSCRITO.
+ */
 client_2.on("message", function (topic, message) {
   if (topic == topico_lixeira_prioritaria) {
     //console.log("Received Message:", topic, message.toString());
@@ -196,13 +202,16 @@ client_2.on("message", function (topic, message) {
   }
 });
 
+/**
+ * PRIORIZA ENTRE AS LIXEIRAS DAS ESTAÇÕES E COLETA
+ */
 setInterval(() => {
   util.ordenaLixeiras().then((data) => {
     if (data.length > 0) {
       let lixeira = data[0];
       console.log(`COLETAR LIXEIRA:${JSON.stringify(lixeira)}`)
-      
-      payload.capacidade = payload.capacidade+lixeira.capacidade;
+
+      payload.capacidade = payload.capacidade + lixeira.capacidade;
       lixeira.capacidade = 0.0;
 
       payload.latitude = lixeira.latitude
