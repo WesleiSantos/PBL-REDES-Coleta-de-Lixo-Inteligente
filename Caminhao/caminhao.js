@@ -98,7 +98,7 @@ client_1.on("connect", function () {
   });
 
   setInterval(() => {
-    client_1.publish([topico_posicao_caminhao], JSON.stringify(payload));
+    client_1.publish(topico_posicao_caminhao, JSON.stringify(payload));
   }, 5000);
 });
 
@@ -176,7 +176,7 @@ client_2.on("connect", function () {
   });
 
   setInterval(() => {
-    client_2.publish("dt/caminhao/posicao", JSON.stringify(payload));
+    client_2.publish(topico_posicao_caminhao, JSON.stringify(payload));
   }, 5000);
 });
 
