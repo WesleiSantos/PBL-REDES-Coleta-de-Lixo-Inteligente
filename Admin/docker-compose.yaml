@@ -1,0 +1,22 @@
+networks:
+  admin-network:
+    driver: bridge
+services:
+  quasar:
+    tty: true # docker run -t
+    restart: unless-stopped
+    image: quasar
+    build:
+      dockerfile: ./Dockerfile
+      context: .
+    ports:
+    - '8080:8080'
+    volumes:
+      - "./:/app"
+      - "./node_modules:/app/node_modules"
+    command: /bin/sh -c "yarn && quasar dev"
+    networks:
+      admin-network:
+    environment:
+      - BASE_URL=http://localhost:80/api/
+      - HOST=127.0.0.1
