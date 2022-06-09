@@ -6,6 +6,7 @@ Você pode acessar os arquivos do projeto clicando [aqui](https://github.com/Wes
 ## ✔️ Técnicas e tecnologias utilizadas
 
 - ``Node.js``
+- ``Vue.js``
 - ``Express``
 - ``Mqtt``
 - ``Redis``
@@ -40,6 +41,14 @@ Você pode acessar os arquivos do projeto clicando [aqui](https://github.com/Wes
 Para instalar e configurar o docker no ubuntu acesse [aqui](https://docs.docker.com/engine/install/ubuntu/)
 
 #### Administrador (Interface)
+Interface para gerenciar as lixeiras por estação.
+Para criar a interface rodar o comando, a interface estará rodando na porta 8080:
+-  docker-compose up --build
+```
+cd Admin
+docker-compose up --build
+```
+
 
 
 #### Estações
