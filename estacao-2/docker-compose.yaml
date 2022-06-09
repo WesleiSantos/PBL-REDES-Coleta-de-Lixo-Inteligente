@@ -1,11 +1,12 @@
 version: "3"
 networks:
-  my-network:
+  my-network-2:
     driver: bridge
     ipam:
       driver: default
       config:
-        - subnet: 192.168.2.0/24 
+        - subnet: 192.168.3.0/24
+
 services:
   mosquitto:
       image: mosquitto
@@ -15,11 +16,11 @@ services:
         context: ../Broker
         dockerfile: dockerfile.broker
       ports: 
-        - 9001:9001
-        - 1883:1883
+        - 9002:9001
+        - 1884:1883
       networks:
-        my-network:
-          ipv4_address: 192.168.2.2
+        my-network-2:
+          ipv4_address: 192.168.3.2
       volumes:
         - ../Broker/config:/mosquitto/config
         - ../Broker/log:/mosquitto/log
@@ -32,12 +33,12 @@ services:
     build: 
       context: ../Lixeira
       dockerfile: dockerfile.lixeira
-    command: sh -c "npm install && npm install nodemon -D && npm start"
+    command: sh -c "npm install && npm start"
     env_file:
-      - .est1.env
+      - .est2.env
     networks:
-        my-network: 
-          ipv4_address: 192.168.2.3
+        my-network-2: 
+          ipv4_address: 192.168.3.3
     volumes:
         - ../Lixeira:/app
     depends_on:
@@ -50,14 +51,14 @@ services:
     build: 
       context: ../Estacao
       dockerfile: dockerfile.estacao
-    command: sh -c "npm install && npm install nodemon -D && npm start"
+    command: sh -c "npm install && npm start"
     env_file:
-      - .est1.env
+      - .est2.env
     networks:
-        my-network: 
-          ipv4_address: 192.168.2.4
+        my-network-2: 
+          ipv4_address: 192.168.3.4
     ports: 
-      - 3000:3000
+      - 3001:3001
     volumes:
         - ../Estacao:/app
     depends_on:
@@ -73,10 +74,10 @@ services:
       dockerfile: dockerfile.db
     command: redis-server --loadmodule "/usr/lib/redis/modules/rejson.so"
     networks:
-        my-network: 
-          ipv4_address: 192.168.2.5
+        my-network-2: 
+          ipv4_address: 192.168.3.5
     ports:
-      - 6379:6379
+      - 6380:6379
 
   redislabs:
     image: redislabs
@@ -86,10 +87,10 @@ services:
       context: ../Estacao
       dockerfile: dockerfile.redislabs
     networks:
-        my-network: 
-          ipv4_address: 192.168.2.6
+        my-network-2: 
+          ipv4_address: 192.168.3.6
     ports:
-      - 8001:8001
+      - 8002:8001
     
   
 

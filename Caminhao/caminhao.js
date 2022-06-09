@@ -86,7 +86,7 @@ client_1.on("connect", function () {
     console.log(`Subscribe to topic '${topico_lixeira_prioritaria}'`);
   });
   client_1.subscribe([topico_resposta_lixeira1], () => {
-    console.log(`Subscribe to topic '${topico_lixeira_prioritaria}'`);
+    console.log(`Subscribe to topic '${topico_resposta_lixeira1}'`);
   });
 
   setInterval(() => {
@@ -97,7 +97,7 @@ client_1.on("connect", function () {
 // Receive message
 client_1.on("message", function (topic, message) {
   if (topic == topico_lixeira_prioritaria) {
-    console.log("Received Message:", topic, message.toString());
+    //console.log("Received Message:", topic, message.toString());
     var json = JSON.parse(message.toString());
     redisClientService.jsonSet(
       `lixeira:${REGIAO_1}`,
@@ -160,7 +160,7 @@ client_2.on("connect", function () {
     console.log(`Subscribe to topic '${topico_lixeira_prioritaria}'`);
   });
   client_2.subscribe([topico_resposta_lixeira2], () => {
-    console.log(`Subscribe to topic '${topico_lixeira_prioritaria}'`);
+    console.log(`Subscribe to topic '${topico_resposta_lixeira2}'`);
   });
 
   setInterval(() => {
@@ -171,7 +171,7 @@ client_2.on("connect", function () {
 // Receive message
 client_2.on("message", function (topic, message) {
   if (topic == topico_lixeira_prioritaria) {
-    console.log("Received Message:", topic, message.toString());
+    //console.log("Received Message:", topic, message.toString());
     var json = JSON.parse(message.toString());
     redisClientService.jsonSet(
       `lixeira:${REGIAO_2}`,
@@ -187,12 +187,8 @@ client_2.on("message", function (topic, message) {
 setInterval(() => {
   util.ordenaLixeiras().then((data) => {
     if (data.length > 0) {
-      let lixeirasList = data;
-      console.log("LISTA ORDENADA: ");
-      for (let i = 0; i < lixeirasList.length; i++) {
-        console.log(JSON.stringify(lixeirasList[i]));
-      }
       let lixeira = data[0];
+      console.log(`COLETAR LIXEIRA:${JSON.stringify(lixeira)}`)
       payload.capacidade =
         parseFloat(payload.capacidade) + parseFloat(lixeira.quantidade);
       lixeira.quantidade = 0.0;

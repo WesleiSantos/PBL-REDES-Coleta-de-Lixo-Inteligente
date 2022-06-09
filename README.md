@@ -3,17 +3,18 @@
 ## Comandos docker
 
 ### Criar container
-- docker compose -f docker-compose-est1.yaml up --build --remove-orphans
-- docker compose -f docker-compose-est2.yaml up --build --remove-orphans
+- docker compose up --build 
+- docker compose up --build 
 
 ### Rodar container 
-- docker compose -f docker-compose-est1.yaml up
-- docker compose -f docker-compose-est2.yaml up
+- docker compose up --remove-orphans
+- docker compose up --remove-orphans
+
 
 ### Remover container
-- docker compose -f docker-compose-est1.yaml down -v
-- docker compose -f docker-compose-est2.yaml down -v
+- docker compose down -v
+- docker compose down -v
 
 ### Limpar banco de dados
-- docker compose -f docker-compose-est1.yaml exec redis redis-cli FLUSHALL
-- docker compose -f docker-compose-est2.yaml exec redis redis-cli FLUSHALL
+- docker compose exec redis redis-cli FLUSHALL
+- docker compose exec redis redis-cli FLUSHALL

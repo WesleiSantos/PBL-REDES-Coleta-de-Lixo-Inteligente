@@ -1,6 +1,6 @@
 const mqtt = require("mqtt");
 
-const {BROKER_HOST, BROKER_PORT, QTD_LIXEIRAS, REGIAO} = process.env;
+const {BROKER_HOST, BROKER_PORT, QTD_LIXEIRAS, REGIAO, TEMPO_ENV} = process.env;
 
 const topico_coleta = `cmd/caminhao/regiao_${REGIAO}/lixeira/esvaziar`;
 
@@ -109,7 +109,7 @@ function create_lixeira(id, latitude, longitude) {
 
       client.publish(topic, JSON.stringify(payload));
       console.log("mensagem enviada: " + JSON.stringify(payload));
-    }, 10000);
+    }, TEMPO_ENV);
   });
 
 }
