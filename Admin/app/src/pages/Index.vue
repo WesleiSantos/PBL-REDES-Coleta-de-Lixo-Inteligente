@@ -9,8 +9,8 @@
               <div class="text-h6">Região {{ region.label }}</div>
             </q-card-section>
             <q-scroll-area style="height: 170px; width: 100%;" v-if="!trashSelect">
-              <template class="flex flex-start" >
-                <card-trash v-for="trash in region.list_trash" :key="trash.id" :trash="trash"  />
+              <template class="flex flex-start">
+                <card-trash v-for="trash in region.list_trash" :key="trash.id" :trash="trash" />
               </template>
             </q-scroll-area>
             <div class="flex flex-center" v-else>
@@ -21,7 +21,7 @@
       </div>
       <div class="row ">
         <div class="col flex justify-center q-mt-md">
-          <q-btn size="lg" unelevated color="primary" icon-right="search" class="q-mx-xs" label="Buscar" />
+          <q-btn size="lg" unelevated color="primary" @click="searchAll()" icon-right="search" class="q-mx-xs" label="Buscar" />
           <q-btn size="lg" unelevated color="primary" icon-right="send" class="q-mx-xs" label="Requisitar" />
         </div>
       </div>
@@ -36,20 +36,20 @@ import { useQuasar } from "quasar";
 
 const regions = [
   {
-    label:"A",
-    list_trash:[],
+    label: "A",
+    list_trash: [],
   },
   {
-    label:"B",
-    list_trash:[],
+    label: "B",
+    list_trash: [],
   },
   {
-    label:"C",
-    list_trash:[],
+    label: "C",
+    list_trash: [],
   },
   {
-    label:"D",
-    list_trash:[],
+    label: "D",
+    list_trash: [],
   }
 ]
 
@@ -62,7 +62,7 @@ export default {
       regions,
       $q: useQuasar(),
       options: [5, 10, 20, 30, 50],
-      trashSelect:null
+      trashSelect: null
     };
   },
   watch: {
@@ -80,6 +80,12 @@ export default {
     this.getAllTrash("D");
   },
   methods: {
+    searchAll() {
+      this.getAllTrash("A");
+      this.getAllTrash("B");
+      this.getAllTrash("C");
+      this.getAllTrash("D");
+    },
     getAllTrash(region, qtd = null) {
       TrashService.index(region, qtd)
         .then((resp) => {
