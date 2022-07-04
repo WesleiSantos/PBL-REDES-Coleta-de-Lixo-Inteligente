@@ -17,6 +17,8 @@ services:
     command: /bin/sh -c "yarn && quasar dev"
     networks:
       admin-network:
+    env_file:
+      - .env
     environment:
       - BASE_URL=http://localhost:80/api/
       - HOST=127.0.0.1

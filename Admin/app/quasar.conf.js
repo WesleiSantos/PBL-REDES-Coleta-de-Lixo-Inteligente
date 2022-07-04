@@ -44,6 +44,23 @@ module.exports = configure(function (ctx) {
     build: {
       vueRouterMode: "hash", // available values: 'hash', 'history'
 
+      env: {
+        BASE_URL: process.env.BASE_URL,
+        HOST: process.env.HOST,
+
+        REGIAO_A_HOST: process.env.REGIAO_A_HOST,
+        REGIAO_A_PORT: process.env.REGIAO_A_PORT,
+
+        REGIAO_B_HOST: process.env.REGIAO_B_HOST,
+        REGIAO_B_PORT: process.env.REGIAO_B_PORT,
+        
+        REGIAO_C_HOST: process.env.REGIAO_C_HOST,
+        REGIAO_C_PORT: process.env.REGIAO_C_PORT,
+
+        REGIAO_D_HOST: process.env.REGIAO_D_HOST,
+        REGIAO_D_PORT: process.env.REGIAO_D_PORT,
+      },
+
       // transpile: false,
       // publicPath: '/',
 

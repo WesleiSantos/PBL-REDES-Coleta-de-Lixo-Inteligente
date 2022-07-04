@@ -10,44 +10,47 @@
         <q-item clickable v-ripple>
           <q-item-section>
             <q-item-label>ID</q-item-label>
-            <q-item-label caption>{{ trash.id ? trash.id : "????"}}</q-item-label>
+            <q-item-label caption>{{ trash.id ? trash.id : "????" }}</q-item-label>
           </q-item-section>
         </q-item>
 
-        <q-item clickable v-ripple>
+        <q-item v-if="expand" clickable v-ripple>
           <q-item-section>
             <q-item-label>Região</q-item-label>
-            <q-item-label caption>{{ trash.regiao ? trash.regiao : "????"}}</q-item-label>
+            <q-item-label caption>{{ trash.regiao ? trash.regiao : "????" }}</q-item-label>
           </q-item-section>
         </q-item>
 
         <q-item clickable v-ripple>
           <q-item-section>
             <q-item-label>Capacidade Utilizada</q-item-label>
-            <q-item-label caption>{{ trash.capacidade ? trash.capacidade : "????"}}</q-item-label>
+            <q-item-label caption>{{ trash.capacidade ? trash.capacidade : "????" }}</q-item-label>
           </q-item-section>
         </q-item>
 
-        <q-item clickable v-ripple>
+        <q-item v-if="expand" clickable v-ripple>
           <q-item-section>
             <q-item-label>Distancia para o caminhão</q-item-label>
-            <q-item-label caption>{{ trash.distancia ? trash.distancia : "????"}}</q-item-label>
+            <q-item-label caption>{{ trash.distancia ? trash.distancia : "????" }}</q-item-label>
           </q-item-section>
         </q-item>
 
-        <q-item clickable v-ripple>
+        <q-item v-if="expand" clickable v-ripple>
           <q-item-section>
             <q-item-label>Longitude</q-item-label>
-            <q-item-label caption>{{ trash.longitude ? trash.longitude : "????"}}</q-item-label>
+            <q-item-label caption>{{ trash.longitude ? trash.longitude : "????" }}</q-item-label>
           </q-item-section>
         </q-item>
 
-        <q-item clickable v-ripple>
+        <q-item v-if="expand" clickable v-ripple>
           <q-item-section>
             <q-item-label>Latitude</q-item-label>
-            <q-item-label caption>{{ trash.latitude ? trash.latitude : "????"}}</q-item-label>
+            <q-item-label caption>{{ trash.latitude ? trash.latitude : "????" }}</q-item-label>
           </q-item-section>
         </q-item>
+        <div class="flex justify-center q-mb-xs">
+          <q-btn  size="xs" unelevated round color="primary" icon="open_in_full" />
+        </div>
       </q-list>
     </q-card>
   </div>
@@ -59,6 +62,9 @@ export default {
     trash: {
       type: Object,
     },
+    expand: {
+      type: Boolean
+    }
   },
 };
 </script>

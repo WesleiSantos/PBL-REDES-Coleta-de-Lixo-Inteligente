@@ -1,7 +1,14 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated class="q-pa-md">
-      <text class="text-weight-bolder text-h3"> Gerenciador de coleta </text>
+  <q-layout  view="hHh lpR fff">
+    <q-header elevated class="q-pa-sm">
+       <q-toolbar>
+        <q-toolbar-title>
+          <q-avatar>
+            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
+          </q-avatar>
+          Gerenciador de coleta
+        </q-toolbar-title>
+      </q-toolbar>
     </q-header>
     <q-page-container>
       <router-view />

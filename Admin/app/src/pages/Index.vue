@@ -1,104 +1,31 @@
 <template>
-  <q-page>
-    <q-layout view="hHh Lpr fFf" class="tw-bg-white">
-      <div class="q-pa-md row q-col-gutter-x-md q-col-gutter-y-md">
-
-        <!---REGIAO A-->
-        <div class="col-12 col-md-6">
+  <q-page padding>
+    <div class="q-pa-md q-col-gutter-y-md">
+      <div class="row q-col-gutter-x-md q-col-gutter-y-md">
+        <!---REGIOES-->
+        <div class="col-12 col-md-6" v-for="(region, index) in regions" :key="index" style="height: 260px">
           <q-card class="bg-grey-2 regiao">
             <q-card-section class="flex justify-between">
-              <div class="text-h4">Região A</div>
-              <q-input
-                v-model="searchA"
-                filled
-                type="search"
-                @keypress.enter="getTrash('A', searchA)"
-              >
-                <template v-slot:prepend>
-                  <q-icon name="search" />
-                </template>
-                <template v-slot:append>
-                  <q-icon
-                    name="close"
-                    @click="
-                      () => {
-                        trashSelectA = null;
-                        searchA = null;
-                      }
-                    "
-                    class="cursor-pointer"
-                  />
-                </template>
-              </q-input>
+              <div class="text-h6">Região {{ region.label }}</div>
             </q-card-section>
-            <div class="q-pa-md flex">
-              <q-select v-model="qtd_a" :options="options" />
-            </div>
-            <div class="h-full" style="overflow-y: scroll; height: 70%">
-              <div class="flex flex-start" v-if="!trashSelectA">
-                <card-trash
-                  v-for="trashA in listTrash_A"
-                  :key="trashA.id"
-                  :trash="trashA"
-                />
-              </div>
-              <div class="flex flex-center" v-else>
-                <card-trash :trash="trashSelectA" />
-              </div>
-            </div>
-          </q-card>
-        </div>
-
-        <!---REGIAO B-->
-        <div class="col-12 col-md-6">
-          <q-card class="bg-grey-2 regiao">
-            <q-card-section class="flex justify-between">
-              <div class="text-h4">Região B</div>
-              <q-input
-                v-model="searchB"
-                filled
-                type="search"
-                @keypress.enter="getTrash('B', searchB)"
-              >
-                <template v-slot:prepend>
-                  <q-icon name="search" />
-                </template>
-                <template v-slot:append>
-                  <q-icon
-                    name="close"
-                    @click="
-                      () => {
-                        trashSelectB = null;
-                        searchB = null;
-                      }
-                    "
-                    class="cursor-pointer"
-                  />
-                </template>
-              </q-input>
-            </q-card-section>
-
-            <div class="q-pa-md flex">
-              <q-select v-model="qtd_b" :options="options" />
-            </div>
-            <div
-              class="flex flex-start"
-              v-if="!trashSelectB"
-              style="overflow-y: scroll; height: 70%"
-            >
-              <card-trash
-                v-for="trashB in listTrash_B"
-                :key="trashB.id"
-                :trash="trashB"
-              />
-            </div>
+            <q-scroll-area style="height: 170px; width: 100%;" v-if="!trashSelect">
+              <template class="flex flex-start" >
+                <card-trash v-for="trash in region.list_trash" :key="trash.id" :trash="trash"  />
+              </template>
+            </q-scroll-area>
             <div class="flex flex-center" v-else>
-              <card-trash :trash="trashSelectB" />
+              <card-trash :trash="trashSelect" />
             </div>
           </q-card>
         </div>
       </div>
-    </q-layout>
+      <div class="row ">
+        <div class="col flex justify-center q-mt-md">
+          <q-btn size="lg" unelevated color="primary" icon-right="search" class="q-mx-xs" label="Buscar" />
+          <q-btn size="lg" unelevated color="primary" icon-right="send" class="q-mx-xs" label="Requisitar" />
+        </div>
+      </div>
+    </div>
   </q-page>
 </template>
 
@@ -107,22 +34,35 @@ import CardTrash from "../components/CardTrash.vue";
 import TrashService from "../services/trashsService";
 import { useQuasar } from "quasar";
 
+const regions = [
+  {
+    label:"A",
+    list_trash:[],
+  },
+  {
+    label:"B",
+    list_trash:[],
+  },
+  {
+    label:"C",
+    list_trash:[],
+  },
+  {
+    label:"D",
+    list_trash:[],
+  }
+]
+
 export default {
   components: {
     CardTrash,
   },
   data() {
     return {
-      qtd_b: null,
-      qtd_a: null,
+      regions,
       $q: useQuasar(),
-      listTrash_A: [],
-      listTrash_B: [],
       options: [5, 10, 20, 30, 50],
-      searchA: null,
-      searchB: null,
-      trashSelectA: null,
-      trashSelectB: null,
+      trashSelect:null
     };
   },
   watch: {
@@ -136,16 +76,16 @@ export default {
   mounted() {
     this.getAllTrash("A");
     this.getAllTrash("B");
+    this.getAllTrash("C");
+    this.getAllTrash("D");
   },
   methods: {
     getAllTrash(region, qtd = null) {
       TrashService.index(region, qtd)
         .then((resp) => {
-          if (region == "A") {
-            this.listTrash_A = resp.data;
-          } else {
-            this.listTrash_B = resp.data;
-          }
+          console.log(resp)
+          let region_selected = this.regions.find(e => e.label == region);
+          region_selected.list_trash = resp.data;
         })
         .catch((e) => {
           console.log(e);
@@ -191,7 +131,8 @@ export default {
 };
 </script>
 
-<style lang="sass" scoped>
-.regiao
-  height: 80vh
+<style lang="css" scoped>
+.regiao {
+  height: 100%;
+}
 </style>
