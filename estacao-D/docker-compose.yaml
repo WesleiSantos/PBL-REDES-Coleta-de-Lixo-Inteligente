@@ -1,0 +1,95 @@
+version: "3"
+networks:
+  my-network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: ${SUB_NET}
+services:
+  mosquitto:
+      image: mosquitto
+      tty: true        # docker run -t
+      restart: on-failure
+      build: 
+        context: ../Broker
+        dockerfile: dockerfile.broker
+      ports: 
+        - ${BROKER_PORT_1}:9001
+        - ${BROKER_PORT_2}:1883
+      networks:
+        my-network:
+          ipv4_address: ${BROKER_HOST}
+      volumes:
+        - ../Broker/config:/mosquitto/config
+        - ../Broker/log:/mosquitto/log
+        - ../Broker/data:/mosquitto/data
+
+  lixeira:
+    image: node
+    tty: true        # docker run -t
+    restart: on-failure
+    build: 
+      context: ../Lixeira
+      dockerfile: dockerfile.lixeira
+    command: sh -c "npm install && npm start"
+    env_file:
+      - .env
+    networks:
+        my-network: 
+          ipv4_address: ${TRASH_HOST}
+    volumes:
+        - ../Lixeira:/app
+    depends_on:
+      - mosquitto
+
+  estacao:
+    image: node
+    tty: true        # docker run -t
+    restart: on-failure
+    build: 
+      context: ../Estacao
+      dockerfile: dockerfile.estacao
+    command: sh -c "npm install && npm start"
+    env_file:
+      - .env
+    networks:
+        my-network: 
+          ipv4_address: ${EXPRESS_HOST}
+    ports: 
+      - ${EXPRESS_PORT}:3000
+    volumes:
+        - ../Estacao:/app
+    depends_on:
+      - lixeira
+      - redis
+
+  redis:
+    image: redis
+    tty: true        # docker run -t
+    restart: on-failure
+    build: 
+      context: ../Estacao
+      dockerfile: dockerfile.db
+    command: redis-server --loadmodule "/usr/lib/redis/modules/rejson.so"
+    networks:
+        my-network: 
+          ipv4_address: ${REDIS_HOST}
+    ports:
+      - ${REDIS_PORT}:6379
+
+  redislabs:
+    image: redislabs
+    tty: true        # docker run -t
+    restart: on-failure
+    build: 
+      context: ../Estacao
+      dockerfile: dockerfile.redislabs
+    networks:
+        my-network: 
+          ipv4_address: ${REDISLABS_HOST}
+    ports:
+      - ${REDISLABS_PORT}:8001
+    
+  
+

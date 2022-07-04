@@ -5,7 +5,7 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: 192.168.2.0/24 
+        - subnet: ${SUB_NET}
 services:
   mosquitto:
       image: mosquitto
@@ -15,11 +15,11 @@ services:
         context: ../Broker
         dockerfile: dockerfile.broker
       ports: 
-        - 9001:9001
-        - 1883:1883
+        - ${BROKER_PORT_1}:9001
+        - ${BROKER_PORT_2}:1883
       networks:
         my-network:
-          ipv4_address: 192.168.2.2
+          ipv4_address: ${BROKER_HOST}
       volumes:
         - ../Broker/config:/mosquitto/config
         - ../Broker/log:/mosquitto/log
@@ -34,10 +34,10 @@ services:
       dockerfile: dockerfile.lixeira
     command: sh -c "npm install && npm start"
     env_file:
-      - .est1.env
+      - .env
     networks:
         my-network: 
-          ipv4_address: 192.168.2.3
+          ipv4_address: ${TRASH_HOST}
     volumes:
         - ../Lixeira:/app
     depends_on:
@@ -52,12 +52,12 @@ services:
       dockerfile: dockerfile.estacao
     command: sh -c "npm install && npm start"
     env_file:
-      - .est1.env
+      - .env
     networks:
         my-network: 
-          ipv4_address: 192.168.2.4
+          ipv4_address: ${EXPRESS_HOST}
     ports: 
-      - 3000:3000
+      - ${EXPRESS_PORT}:3000
     volumes:
         - ../Estacao:/app
     depends_on:
@@ -74,9 +74,9 @@ services:
     command: redis-server --loadmodule "/usr/lib/redis/modules/rejson.so"
     networks:
         my-network: 
-          ipv4_address: 192.168.2.5
+          ipv4_address: ${REDIS_HOST}
     ports:
-      - 6379:6379
+      - ${REDIS_PORT}:6379
 
   redislabs:
     image: redislabs
@@ -87,9 +87,9 @@ services:
       dockerfile: dockerfile.redislabs
     networks:
         my-network: 
-          ipv4_address: 192.168.2.6
+          ipv4_address: ${REDISLABS_HOST}
     ports:
-      - 8001:8001
+      - ${REDISLABS_PORT}:8001
     
   
 

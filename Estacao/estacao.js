@@ -16,13 +16,13 @@ const {
     REDIS_PORT,
     BROKER_HOST,
     BROKER_PORT,
-    PORT,
+    EXPRESS_PORT,
     REGIAO
 } = process.env;
 
 //***************************    REDIS    ********************************//
 const clientRedis = redis.createClient({
-    url: `redis://${REDIS_HOST}:${REDIS_PORT}`
+    url: `redis://${REDIS_HOST}:6379`
 });
 const redisClientService = new RedisClient(clientRedis);
 const util = new Utils(redisClientService);
@@ -47,7 +47,7 @@ app.set('utils', util);
 app.use(bodyParser.json());
 const router = require('./routes')(app);
 app.use('/api', router);
-const portApp = PORT;
+const portApp = 3000;
 app.listen(portApp, () => {
     console.log(`App listening on port ${portApp}`);
 });

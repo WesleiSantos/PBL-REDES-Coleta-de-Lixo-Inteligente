@@ -1,12 +1,11 @@
 version: "3"
 networks:
-  my-network-2:
+  my-network:
     driver: bridge
     ipam:
       driver: default
       config:
-        - subnet: 192.168.3.0/24
-
+        - subnet: ${SUB_NET}
 services:
   mosquitto:
       image: mosquitto
@@ -16,11 +15,11 @@ services:
         context: ../Broker
         dockerfile: dockerfile.broker
       ports: 
-        - 9002:9001
-        - 1884:1883
+        - ${BROKER_PORT_1}:9001
+        - ${BROKER_PORT_2}:1883
       networks:
-        my-network-2:
-          ipv4_address: 192.168.3.2
+        my-network:
+          ipv4_address: ${BROKER_HOST}
       volumes:
         - ../Broker/config:/mosquitto/config
         - ../Broker/log:/mosquitto/log
@@ -35,10 +34,10 @@ services:
       dockerfile: dockerfile.lixeira
     command: sh -c "npm install && npm start"
     env_file:
-      - .est2.env
+      - .env
     networks:
-        my-network-2: 
-          ipv4_address: 192.168.3.3
+        my-network: 
+          ipv4_address: ${TRASH_HOST}
     volumes:
         - ../Lixeira:/app
     depends_on:
@@ -53,12 +52,12 @@ services:
       dockerfile: dockerfile.estacao
     command: sh -c "npm install && npm start"
     env_file:
-      - .est2.env
+      - .env
     networks:
-        my-network-2: 
-          ipv4_address: 192.168.3.4
+        my-network: 
+          ipv4_address: ${EXPRESS_HOST}
     ports: 
-      - 3001:3001
+      - ${EXPRESS_PORT}:3000
     volumes:
         - ../Estacao:/app
     depends_on:
@@ -74,10 +73,10 @@ services:
       dockerfile: dockerfile.db
     command: redis-server --loadmodule "/usr/lib/redis/modules/rejson.so"
     networks:
-        my-network-2: 
-          ipv4_address: 192.168.3.5
+        my-network: 
+          ipv4_address: ${REDIS_HOST}
     ports:
-      - 6380:6379
+      - ${REDIS_PORT}:6379
 
   redislabs:
     image: redislabs
@@ -87,10 +86,10 @@ services:
       context: ../Estacao
       dockerfile: dockerfile.redislabs
     networks:
-        my-network-2: 
-          ipv4_address: 192.168.3.6
+        my-network: 
+          ipv4_address: ${REDISLABS_HOST}
     ports:
-      - 8002:8001
+      - ${REDISLABS_PORT}:8001
     
   
 
