@@ -30,4 +30,15 @@ export default {
       return api_b.get(`lixeira/${id}`);
     }
   },
+  reserve: (region, list_dumps) => {
+    if (region == "A") {
+      return api_a.get(`reserve`, {params:list_dumps});
+    } else if (region == "B") {
+      return api_b.get(`reserve`, {params:list_dumps});
+    } else if (region == "C") {
+      return api_c.get(`reserve`, {params:list_dumps});
+    } else if (region == "D") {
+      return api_d.get(`reserve`, {params:list_dumps});
+    }
+  }
 };

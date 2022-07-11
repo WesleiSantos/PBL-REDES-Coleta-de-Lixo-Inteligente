@@ -15,6 +15,7 @@ module.exports = app => {
     router.get('/lixeiras/:qtd/:reg1/:reg2/:reg3',[], (...args) => indexController.index(...args));
     router.get('/lixeira/:id',[], (...args) => indexController.show(...args));
     router.get('/all',[], (...args) => indexController.all(...args));
+    router.get('/reserve',[], (...args) => indexController.reserve(...args));
 
     return router;
 };

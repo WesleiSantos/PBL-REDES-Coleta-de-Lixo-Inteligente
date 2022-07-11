@@ -21,8 +21,6 @@ class LixeiraIndexController {
                 console.log("erro: ", e);
             });
         }
-        
-
         //const response =  axios.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
         //console.log(response.data.url);
         //console.log(response.data.explanation);
@@ -62,6 +60,16 @@ class LixeiraIndexController {
             }
             return res.send(lixeirasList);
         })
+    }
+
+    async reserve(req, res){
+        console.log(req.query)
+        let array = [];
+        for (const [key, value] of Object.entries(req.query)) {
+            array.push(JSON.parse(value));
+        }
+
+        return res.send(array);
     }
 
 
