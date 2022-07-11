@@ -7,6 +7,7 @@ const cors = require('cors');
 const RedisClient = require('./services/RedisClient');
 const Utils = require('./services/Utils');
 const mqtt = require('mqtt');
+const axios = require('axios');
 
 rejson(redis);
 require('dotenv').config();
@@ -44,6 +45,7 @@ app.use(
 );
 app.set('redisClientService', redisClientService);
 app.set('utils', util);
+app.set('axios', axios);
 app.use(bodyParser.json());
 const router = require('./routes')(app);
 app.use('/api', router);
@@ -146,7 +148,7 @@ client.on('message', function (topic, message) {
             let list_ordena_capacidade = data;
             console.log('LISTA ORDENADA: ');
             for (let i = 0; i < list_ordena_capacidade.length; i++) {
-                console.log(JSON.stringify(list_ordena_capacidade[i]));
+               console.log(JSON.stringify(list_ordena_capacidade[i]));
             }
 
             //ordena-as pela distancia entre elas e o caminhao

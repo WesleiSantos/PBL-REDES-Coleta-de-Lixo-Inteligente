@@ -1,8 +1,9 @@
 class LixeiraIndexController {
     
-    constructor(redisClientService,utilsServices) {
+    constructor(redisClientService,utilsServices, axios) {
         this.utilsServices  = utilsServices;
         this.redisClientService = redisClientService;
+        this.axios = axios;
     }
     async index(req, res) {
         let qtd_lixeiras = req.params.qtd
@@ -13,13 +14,11 @@ class LixeiraIndexController {
         console.log(">>> REGION 2 = "+estacoes[1])
         console.log(">>> REGION 3 = "+estacoes[2])
 
-        const axios = require('axios');
         for(let i=0; i < estacoes.length; i++){
-
-            axios.get(`http:${estacoes[i]}/api/all`).then((resp) => {
+            this.axios.get(`http://${estacoes[i]}/api/all`).then((resp) => {
                 console.log("RESPOSTA", resp.data)
             }).catch((e) => {
-                console.log("erro: ", e.response.data);
+                console.log("erro: ", e);
             });
         }
         

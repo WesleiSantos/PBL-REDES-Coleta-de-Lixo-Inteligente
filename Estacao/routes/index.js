@@ -6,9 +6,10 @@ const IndexController = require('../controllers/IndexController');
 module.exports = app => {
     const utils = app.get('utils');
     const redisClientService = app.get('redisClientService');
+    const axios = app.get('axios')
 
     redisClientService
-    const indexController = new IndexController(redisClientService,utils);
+    const indexController = new IndexController(redisClientService,utils,axios);
     router.get('/lixeiras',[], (...args) => indexController.index(...args));
     router.get('/lixeiras/:qtd',[], (...args) => indexController.index(...args));
     router.get('/lixeiras/:qtd/:reg1/:reg2/:reg3',[], (...args) => indexController.index(...args));
