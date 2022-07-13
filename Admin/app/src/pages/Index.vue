@@ -112,7 +112,7 @@ export default {
       }).catch(e => {
         console.log(e);
       });
-      TrashService.reserve('B', listSelectedB).then(data => {
+      TrashService.reserve('B', listSelectedA).then(data => {
         console.log(data)
       }).catch(e => {
         console.log(e);
