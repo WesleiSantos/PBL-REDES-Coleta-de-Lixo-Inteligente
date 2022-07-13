@@ -228,6 +228,23 @@ if (REGIAO != 'A') {
             }
             if (json.type == 'REQ') {
                 let current_time = mutualExclusionServices.setCurrentTime(json.timestamp);
+                
+                let sc = null;
+                if(mutualExclusionServices.getListTrash()==0){ //NAO DESEJA ACESSAR A SC
+                    mutualExclusionServices.setFalseRequesting()
+                }else{
+                    for(let i = 0; i<json.list_trash.length; i++){
+                        sc = mutualExclusionServices.getListTrash.find(lixeira => 
+                            (lixeira.id == json.list_trash[i].id) && 
+                            (lixeira.regiao == json.list_trash[i].regiao));
+
+                        if(sc != null){ //ENCONTROU A MEMSA LIXEIRA EM AMBAS AS REQUESIÇÕES
+                            mutualExclusionServices.setTrueRequesting();
+                            break;
+                        }
+                    }
+                }
+
                 if (!mutualExclusionServices.getIsRequesting() || mutualExclusionServices.getTimestamp() > json.timestamp) {
                     console.log(json.id)
                     if (json.id == 'A' && json.id != REGIAO) {
@@ -238,6 +255,34 @@ if (REGIAO != 'A') {
                         clientC.publish(topic, JSON.stringify({ type: 'REPLY', id: REGIAO, id_target: json.id, timestamp: current_time }));
                     } else if (json.id == 'D' && json.id != REGIAO) {
                         clientD.publish(topic, JSON.stringify({ type: 'REPLY', id: REGIAO, id_target: json.id, timestamp: current_time }));
+                    }
+                }else{ //timestamp iguais e querem acessar a sessao critica
+                    //somar as médias da distancia entre a lixeira e o caminhao de cada estacao
+                    let estacao1;
+                    let estacao_local;
+                    for(let i = 0; i<json.list_trash.length; i++){
+                        estacao1 += json.list_trash[i].distanciaCaminhao //(nao lembro como ta no json)
+                    }
+                    estacao1 /= json.list_trash.length
+
+                    for(let i = 0; i<mutualExclusionServices.getListTrash.length; i++){
+                        estacao_local += mutualExclusionServices.getListTrash[i].distanciaCaminhao //(nao lembro como ta no json)
+                    }
+                    estacao_local /= mutualExclusionServices.getListTrash.length
+
+                    if(estacao1 > estacao_local){ //prioriza a menor distancia - estacao_local
+                        //tem acesso a seção crítica
+                    }else{
+                        console.log(json.id)
+                        if (json.id == 'A' && json.id != REGIAO) {
+                            clientA.publish(topic, JSON.stringify({ type: 'REPLY', id: REGIAO, id_target: json.id, timestamp: current_time }));
+                        } else if (json.id == 'B' && json.id != REGIAO) {
+                            clientB.publish(topic, JSON.stringify({ type: 'REPLY', id: REGIAO, id_target: json.id, timestamp: current_time }));
+                        } else if (json.id == 'C' && json.id != REGIAO) {
+                            clientC.publish(topic, JSON.stringify({ type: 'REPLY', id: REGIAO, id_target: json.id, timestamp: current_time }));
+                        } else if (json.id == 'D' && json.id != REGIAO) {
+                            clientD.publish(topic, JSON.stringify({ type: 'REPLY', id: REGIAO, id_target: json.id, timestamp: current_time }));
+                        }
                     }
                 }
             }
@@ -367,6 +412,8 @@ if (REGIAO != 'C') {
             }
             if (json.type == 'REQ') {
                 let current_time = mutualExclusionServices.setCurrentTime(json.timestamp);
+
+
                 if (mutualExclusionServices.getIsRequesting() || mutualExclusionServices.getTimestamp() > json.timestamp) {
                     if (json.id == 'A' && json.id != REGIAO) {
                         clientA.publish(topic, JSON.stringify({ type: 'REPLY', id: REGIAO, id_target: json.id, timestamp: current_time }));

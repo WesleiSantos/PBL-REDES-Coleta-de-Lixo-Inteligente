@@ -41,8 +41,20 @@ class MutualExclusion {
         return this.my_timestamp;
     }
 
+    getListTrash(){
+        return this.list_trash;
+    }
+
     getIsRequesting(){
         return this.is_requesting;
+    }
+
+    setTrueRequesting(){
+        this.is_requesting=true;
+    }
+
+    setFalseRequesting(){
+        this.is_requesting=false;
     }
 
     setReplyPending(){
