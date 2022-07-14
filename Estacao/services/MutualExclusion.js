@@ -22,7 +22,7 @@ class MutualExclusion {
         console.log("ENTER_CS");
         this.list_trash = trash;
         this.is_region_critical=false;
-        this.current_time = 0;
+        //this.current_time = 0;
         this.my_timestamp = this.current_time;
         //this.is_requesting = true;
         this.replies_pending = 3;

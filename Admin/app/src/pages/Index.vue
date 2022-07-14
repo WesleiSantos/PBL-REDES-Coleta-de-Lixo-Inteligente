@@ -118,6 +118,7 @@ export default {
       this.regions = this.regions.map(e =>{
         return {...e, requestReserve: true}
       });
+      
       TrashService.reserve('B', listSelectedB).then(data => {
         console.log(data)
       }).catch(e => {
