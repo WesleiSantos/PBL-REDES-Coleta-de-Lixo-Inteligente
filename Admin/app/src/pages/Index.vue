@@ -107,7 +107,6 @@ export default {
       let listSelectedC = this.regions.find(e => e.label == 'C').list_selected;
       let listSelectedD = this.regions.find(e => e.label == 'D').list_selected;
 
-     
       TrashService.reserve('B', listSelectedA).then(data => {
         console.log(data)
       }).catch(e => {
@@ -124,6 +123,31 @@ export default {
         console.log(e);
       });
       TrashService.reserve('D', listSelectedD).then(data => {
+        console.log(data)
+      }).catch(e => {
+        console.log(e);
+      });
+
+      setInterval(this.verifyReserves,2000);
+
+    },
+    verifyReserves(){
+       TrashService.verifyReserve('B').then(data => {
+        console.log(data)
+      }).catch(e => {
+        console.log(e);
+      });
+       TrashService.verifyReserve('A').then(data => {
+        console.log(data)
+      }).catch(e => {
+        console.log(e);
+      });
+      TrashService.verifyReserve('C').then(data => {
+        console.log(data)
+      }).catch(e => {
+        console.log(e);
+      });
+      TrashService.verifyReserve('D').then(data => {
         console.log(data)
       }).catch(e => {
         console.log(e);

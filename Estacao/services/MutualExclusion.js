@@ -15,11 +15,13 @@ class MutualExclusion {
         this.reply_deferred = [];
         this.totalProccess = 3;
         this.list_trash = []
+        this.is_region_critical=false;
     }
 
     enter_cs(trash){
         console.log("ENTER_CS");
         this.list_trash = trash;
+        this.is_region_critical=false;
         this.current_time = 0;
         this.my_timestamp = this.current_time;
         //this.is_requesting = true;
@@ -29,6 +31,14 @@ class MutualExclusion {
 
     exit_CS(){
         this.is_requesting = false;
+    }
+
+    setRegionCritical(val){
+        this.is_region_critical = val;
+    }
+
+    getRegionCritical(){
+        return this.is_region_critical;
     }
 
     setCurrentTime(time){

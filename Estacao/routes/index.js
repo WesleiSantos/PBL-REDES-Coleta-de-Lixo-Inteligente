@@ -19,6 +19,7 @@ module.exports = app => {
     router.get('/lixeira/:id',[], (...args) => indexController.show(...args));
     router.get('/all',[], (...args) => indexController.all(...args));
     router.get('/reserve',[], (...args) => indexController.reserve(...args));
+    router.get('/verify-reserve',[], (...args) => indexController.verifyStatusReserve(...args));
 
     return router;
 };

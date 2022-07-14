@@ -40,5 +40,16 @@ export default {
     } else if (region == "D") {
       return api_d.get(`reserve`, {params:list_dumps});
     }
+  },
+  verifyReserve: (region)=>{
+    if (region == "A") {
+      return api_a.get(`verify-reserve`);
+    } else if (region == "B") {
+      return api_b.get(`verify-reserve`);
+    } else if (region == "C") {
+      return api_c.get(`verify-reserve`);
+    } else if (region == "D") {
+      return api_d.get(`verify-reserve`);
+    }
   }
 };

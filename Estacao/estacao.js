@@ -190,6 +190,8 @@ client.on('message', function (topic, message) {
     }
     if (mutualExclusionServices.getReplyPending() == 0) {
         console.log(`Caminhao ${REGIAO} entrou na sessão crítica`);
+        mutualExclusionServices.setRegionCritical(true);
+        console.log("REGIAO CRITICA: ",mutualExclusionServices.getRegionCritical())
         mutualExclusionServices.setReplyPending(3);
     }
 });
