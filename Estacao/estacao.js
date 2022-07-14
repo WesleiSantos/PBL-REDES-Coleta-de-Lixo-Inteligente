@@ -189,10 +189,13 @@ client.on('message', function (topic, message) {
         console.log("QTD REPLY", mutualExclusionServices.getReplyPending())
     }
     if (mutualExclusionServices.getReplyPending() == 0) {
-        console.log(`Caminhao ${REGIAO} entrou na sessão crítica`);
-        mutualExclusionServices.setRegionCritical(true);
-        console.log("REGIAO CRITICA: ",mutualExclusionServices.getRegionCritical())
-        mutualExclusionServices.setReplyPending(3);
+        if (mutualExclusionServices.getListTrash().length>0) {
+            console.log(`Caminhao ${REGIAO} entrou na sessão crítica`);
+            mutualExclusionServices.setRegionCritical(true);
+            console.log("REGIAO CRITICA: ", mutualExclusionServices.getRegionCritical())
+            mutualExclusionServices.setReplyPending(3);
+        }
+
     }
 });
 
@@ -238,7 +241,7 @@ if (REGIAO != 'A') {
         if (topic == "mutual-exclusion") {
             if (json.type == 'REQ') {
                 let current_time = mutualExclusionServices.setCurrentTime(json.timestamp);
-                console.log(REGIAO, " recebeu REQ de ", json.id," Current_temp atual=", mutualExclusionServices.getCurrentTime())
+                console.log(REGIAO, " recebeu REQ de ", json.id, " Current_temp atual=", mutualExclusionServices.getCurrentTime())
 
                 let sc = null;
                 let aux = false;
@@ -320,7 +323,7 @@ if (REGIAO != 'B') {
         if (topic == "mutual-exclusion") {
             if (json.type == 'REQ') {
                 let current_time = mutualExclusionServices.setCurrentTime(json.timestamp);
-                console.log(REGIAO, " recebeu REQ de ", json.id," Current_temp atual=", mutualExclusionServices.getCurrentTime())
+                console.log(REGIAO, " recebeu REQ de ", json.id, " Current_temp atual=", mutualExclusionServices.getCurrentTime())
 
                 let sc = null;
                 let aux = false;
@@ -402,7 +405,7 @@ if (REGIAO != 'C') {
         if (topic == "mutual-exclusion") {
             if (json.type == 'REQ') {
                 let current_time = mutualExclusionServices.setCurrentTime(json.timestamp);
-                console.log(REGIAO, " recebeu REQ de ", json.id," Current_temp atual=", mutualExclusionServices.getCurrentTime())
+                console.log(REGIAO, " recebeu REQ de ", json.id, " Current_temp atual=", mutualExclusionServices.getCurrentTime())
 
                 let sc = null;
                 let aux = false;
@@ -486,7 +489,7 @@ if (REGIAO != 'D') {
         if (topic == "mutual-exclusion") {
             if (json.type == 'REQ') {
                 let current_time = mutualExclusionServices.setCurrentTime(json.timestamp);
-                console.log(REGIAO, " recebeu REQ de ", json.id," Current_temp atual=", mutualExclusionServices.getCurrentTime())
+                console.log(REGIAO, " recebeu REQ de ", json.id, " Current_temp atual=", mutualExclusionServices.getCurrentTime())
 
                 let sc = null;
                 let aux = false;
