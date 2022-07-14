@@ -1,6 +1,6 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
-    <q-card class="my-card" :class="[{ 'bg-secondary': selected }, { 'bg-white': !selected }]"
+    <q-card class="my-card" :class="selected? (requestReserve? 'bg-grey-500':'bg-primary'):(requestReserve?  'bg-grey-500':'bg-white')"
       @click="selectTrash(trash.id, trash.regiao)">
       <q-item-section top avatar>
         <q-avatar rounded class="q-mx-auto q-my-xs">
@@ -65,6 +65,10 @@ export default {
     },
     expand: {
       type: Boolean
+    },
+    requestReserve: {
+      type: Boolean,
+      default: false
     }
   },
   data() {

@@ -11,7 +11,7 @@
             <q-scroll-area style="height: 170px; width: 100%;" v-if="!trashSelect">
               <template class="flex flex-start">
                 <card-trash @trashSelected="selectTrash" v-for="trash in region.list_trash" :key="trash.id"
-                  :trash="trash" />
+                  :trash="trash" :requestReserve="region.requestReserve"/>
               </template>
             </q-scroll-area>
             <div class="flex flex-center" v-else>
@@ -40,22 +40,30 @@ const regions = [
   {
     label: "A",
     list_trash: [],
-    list_selected: []
+    list_selected: [],
+    requestReserve: false,
+    reserve: false
   },
   {
     label: "B",
     list_trash: [],
-    list_selected: []
+    list_selected: [],
+    requestReserve: false,
+    reserve: false
   },
   {
     label: "C",
     list_trash: [],
-    list_selected: []
+    list_selected: [],
+    requestReserve: false,
+    reserve: false
   },
   {
     label: "D",
     list_trash: [],
-    list_selected: []
+    list_selected: [],
+    requestReserve: false,
+    reserve: false
   }
 ]
 
@@ -65,6 +73,10 @@ export default {
   },
   data() {
     return {
+      estacaoA: false,
+      estacaoB: false,
+      estacaoC: false,
+      estacaoD: false,
       regions,
       $q: useQuasar(),
       options: [5, 10, 20, 30, 50],
