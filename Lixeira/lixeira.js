@@ -107,7 +107,6 @@ function create_lixeira(id, latitude, longitude) {
     //GERA O LIXO E ENVIA PARA O TÓPICO RESPONSÁVEL (ESTAÇÃO)
     setInterval(() => {
       var capacidade = "" + Math.floor(5 * Math.random() + 1) + "%";
-      
       //evitar que ultrapasse a 100%
       if (parseFloat(payload.capacidade) < 100 && parseFloat(payload.capacidade) + parseFloat(capacidade) <= 100) {
         payload.capacidade = parseFloat(payload.capacidade) + parseFloat(capacidade);

@@ -14,14 +14,26 @@ class LixeiraIndexController {
         console.log(">>> REGION 1 = " + estacoes[0])
         console.log(">>> REGION 2 = " + estacoes[1])
         console.log(">>> REGION 3 = " + estacoes[2])
-
+        let array = []
         for (let i = 0; i < estacoes.length; i++) {
             this.axios.get(`http://${estacoes[i]}/api/all`).then((resp) => {
-                console.log("RESPOSTA", resp.data)
+                //console.log("RESPOSTA", resp.data)
+                array.push(...resp.data)
+                if (i == estacoes.length-1) {
+                    console.log(array)
+                    this.utilsServices.ordenaLixeiras(array).then(data => {
+                        let lixeirasList = data;
+                        if (qtd_lixeiras > 0) {
+                            lixeirasList = lixeirasList.slice(0, qtd_lixeiras);
+                        }
+                        return res.send(lixeirasList);
+                    })
+                }
             }).catch((e) => {
                 console.log("erro: ", e);
             });
         }
+
 
 
         //const response =  axios.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
@@ -45,13 +57,7 @@ class LixeiraIndexController {
             });
         });*/
 
-        this.utilsServices.ordenaLixeiras().then(data => {
-            let lixeirasList = data;
-            if (qtd_lixeiras > 0) {
-                lixeirasList = lixeirasList.slice(0, qtd_lixeiras);
-            }
-            return res.send(lixeirasList);
-        })
+
     }
 
     async all(req, res) {
@@ -73,14 +79,14 @@ class LixeiraIndexController {
         }
 
         this.mutualExclusionServices.enter_cs(array);
-        
+
         return res.send(array);
     }
 
-    async verifyStatusReserve(req, res){
+    async verifyStatusReserve(req, res) {
         if (this.mutualExclusionServices.getRegionCritical()) {
             return res.send(true);
-        }else{
+        } else {
             return res.send(false);
         }
     }

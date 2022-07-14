@@ -1,6 +1,6 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
-    <q-card class="my-card" :class="[{ 'bg-secondary': selected }, { 'bg-white': !selected }]"
+    <q-card class="my-card" :class="[{ 'bg-primary': selected }, { 'bg-white': !selected }]"
       @click="selectTrash(trash.id, trash.regiao)">
       <q-item-section top avatar>
         <q-avatar rounded class="q-mx-auto q-my-xs">
@@ -15,7 +15,7 @@
           </q-item-section>
         </q-item>
 
-        <q-item v-if="expand" clickable v-ripple>
+        <q-item clickable v-ripple>
           <q-item-section>
             <q-item-label>Região</q-item-label>
             <q-item-label caption>{{ trash.regiao ? trash.regiao : "????" }}</q-item-label>
@@ -63,6 +63,9 @@ export default {
     trash: {
       type: Object,
     },
+    origin_region: {
+      type: String
+    },
     expand: {
       type: Boolean
     }
@@ -75,7 +78,7 @@ export default {
   methods: {
     selectTrash(id, region) {
       this.selected = !this.selected;
-      this.$emit('trashSelected', this.selected, id, region);
+      this.$emit('trashSelected', this.selected, id, region, this.origin_region);
     }
   }
 };

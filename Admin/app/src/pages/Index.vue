@@ -10,7 +10,7 @@
             </q-card-section>
             <q-scroll-area style="height: 170px; width: 100%;" v-if="!trashSelect">
               <template class="flex flex-start">
-                <card-trash @trashSelected="selectTrash" v-for="trash in region.list_trash" :key="trash.id"
+                <card-trash @trashSelected="selectTrash" :origin_region="region.label" v-for="trash in region.list_trash" :key="trash.id"
                   :trash="trash" />
               </template>
             </q-scroll-area>
@@ -86,15 +86,14 @@ export default {
     this.getAllTrash("D");
   },
   methods: {
-    selectTrash(status, id, region) {
-      console.log(status, id, region);
+    selectTrash(status, id, region, origin) {
       const filterTrahs = (e) => {
         return {
           ...e,
-          list_selected: e.list_selected.filter(e => e.id != id && e.region != region)
+          list_selected: e.label == origin ? e.list_selected.filter(e => e.id != id) : [...e.list_selected] 
         }
       }
-      let regionSelected = this.regions.find(e => e.label == region);
+      let regionSelected = this.regions.find(e => e.label == origin);
       if (status) {
         regionSelected.list_selected.push({ id, region });
       } else {
@@ -107,7 +106,7 @@ export default {
       let listSelectedC = this.regions.find(e => e.label == 'C').list_selected;
       let listSelectedD = this.regions.find(e => e.label == 'D').list_selected;
 
-      TrashService.reserve('B', listSelectedA).then(data => {
+      TrashService.reserve('B', listSelectedB).then(data => {
         console.log(data)
       }).catch(e => {
         console.log(e);
@@ -117,7 +116,7 @@ export default {
       }).catch(e => {
         console.log(e);
       });
-      TrashService.reserve('C', listSelectedD).then(data => {
+      TrashService.reserve('C', listSelectedC).then(data => {
         console.log(data)
       }).catch(e => {
         console.log(e);
