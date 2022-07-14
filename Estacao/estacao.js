@@ -128,6 +128,9 @@ client.on('connect', function () {
     client.subscribe([topico_limpar_lixeira], () => {
         console.log(`Subscribe to topic '${topico_limpar_lixeira}'`);
     });
+    client.subscribe([`reply-${REGIAO}`], () => {
+        console.log(`Subscribe to topic 'reply-${REGIAO}'`);
+    });
 });
 
 /**
@@ -136,6 +139,7 @@ client.on('connect', function () {
 client.on('message', function (topic, message) {
     //console.log('Received Message:', topic, message.toString());
     var json = JSON.parse(message.toString());
+
     if (topic == topicLixeira) {
         json.distancia = calcularDistancia(caminhao_posicao_latitude, caminhao_posicao_longitude, json.latitude, json.longitude).toFixed(2)
         redisClientService.jsonSet(`lixeira:${json.id}`, '.', JSON.stringify(json));
@@ -177,8 +181,17 @@ client.on('message', function (topic, message) {
         caminhao_posicao_latitude = json.latitude;
         caminhao_posicao_longitude = json.longitude;
     }
-
-
+    if (topic == `reply-${REGIAO}`) {
+        console.log("VEIO NO topico ", `reply-${REGIAO}`);
+        console.log('REPLY ENVIADO POR: ', json.id)
+        mutualExclusionServices.setReplyPending(-1);
+        mutualExclusionServices.setCurrentTime(json.timestamp);
+        console.log("QTD REPLY", mutualExclusionServices.getReplyPending())
+    }
+    if (mutualExclusionServices.getReplyPending() == 0) {
+        console.log(`Caminhao ${REGIAO} entrou na sessão crítica`);
+        mutualExclusionServices.setReplyPending(3);
+    }
 });
 
 
@@ -220,32 +233,44 @@ if (REGIAO != 'A') {
 
     clientA.on('message', function (topic, message) {
         var json = JSON.parse(message.toString());
-        console.log("REGIAO A", topic);
         if (topic == "mutual-exclusion") {
-            console.log(json.type)
-            if (mutualExclusionServices.getReplyPending() == 0) {
-                console.log(`Caminhao ${REGIAO} entrou na sessão crítica`);
-            }
             if (json.type == 'REQ') {
                 let current_time = mutualExclusionServices.setCurrentTime(json.timestamp);
-                if (!mutualExclusionServices.getIsRequesting() || mutualExclusionServices.getTimestamp() > json.timestamp) {
-                    console.log(json.id)
-                    if (json.id == 'A' && json.id != REGIAO) {
-                        clientA.publish(topic, JSON.stringify({ type: 'REPLY', id: REGIAO, id_target: json.id, timestamp: current_time }));
-                    } else if (json.id == 'B' && json.id != REGIAO) {
-                        clientB.publish(topic, JSON.stringify({ type: 'REPLY', id: REGIAO, id_target: json.id, timestamp: current_time }));
-                    } else if (json.id == 'C' && json.id != REGIAO) {
-                        clientC.publish(topic, JSON.stringify({ type: 'REPLY', id: REGIAO, id_target: json.id, timestamp: current_time }));
-                    } else if (json.id == 'D' && json.id != REGIAO) {
-                        clientD.publish(topic, JSON.stringify({ type: 'REPLY', id: REGIAO, id_target: json.id, timestamp: current_time }));
+                console.log(REGIAO, " recebeu REQ de ", json.id," Current_temp atual=", mutualExclusionServices.getCurrentTime())
+
+                let sc = null;
+                let aux = false;
+                if (mutualExclusionServices.getListTrash() == 0) { //NAO DESEJA ACESSAR A SC
+                    mutualExclusionServices.setFalseRequesting()
+                } else {
+                    console.log("Tamanho da lista: ", json.list_trash.length)
+                    for (let i = 0; i < json.list_trash.length; i++) {
+                        sc = mutualExclusionServices.getListTrash().find(lixeira =>
+                            (lixeira.id == json.list_trash[i].id) &&
+                            (lixeira.regiao == json.list_trash[i].regiao));
+
+                        if (sc != null) { //ENCONTROU A MEMSA LIXEIRA EM AMBAS AS REQUESIÇÕES
+                            aux = true;
+                            mutualExclusionServices.setTrueRequesting();
+                            break;
+                        }
                     }
                 }
-            }
-            if (json.type == 'REPLY') {
-                if (json.id_target == REGIAO) {
-                    mutualExclusionServices.setReplyPending();
-                    mutualExclusionServices.setCurrentTime(json.timestamp);
+                if (!aux) {
+                    sendReply(json, current_time);
+                    aux = false;
+                } else {
+                    console.log(`Timestamp ${REGIAO} = ${mutualExclusionServices.getTimestamp()} e timestamp ${json.id} = ${json.timestamp}`);
+                    console.log(!mutualExclusionServices.getIsRequesting(), (mutualExclusionServices.getTimestamp() > json.timestamp), REGIAO > json.id)
+                    if ((mutualExclusionServices.getTimestamp() > json.timestamp)) {
+                        sendReply(json, current_time);
+                    } else if ((mutualExclusionServices.getTimestamp() == json.timestamp)) {
+                        if (REGIAO > json.id) {
+                            sendReply(json, current_time);
+                        }
+                    }
                 }
+
             }
         }
     })
@@ -290,31 +315,44 @@ if (REGIAO != 'B') {
 
     clientB.on('message', function (topic, message) {
         var json = JSON.parse(message.toString());
-        console.log("REGIAO B", topic);
         if (topic == "mutual-exclusion") {
-            console.log(json.type)
-            if (mutualExclusionServices.getReplyPending() == 0) {
-                console.log(`Caminhao ${REGIAO} entrou na sessão crítica`);
-            }
             if (json.type == 'REQ') {
                 let current_time = mutualExclusionServices.setCurrentTime(json.timestamp);
-                if (mutualExclusionServices.getIsRequesting() || mutualExclusionServices.getTimestamp() > json.timestamp) {
-                    if (json.id == 'A' && json.id != REGIAO) {
-                        clientA.publish(topic, JSON.stringify({ type: 'REPLY', id: REGIAO, id_target: json.id, timestamp: current_time }));
-                    } else if (json.id == 'B' && json.id != REGIAO) {
-                        clientB.publish(topic, JSON.stringify({ type: 'REPLY', id: REGIAO, id_target: json.id, timestamp: current_time }));
-                    } else if (json.id == 'C' && json.id != REGIAO) {
-                        clientC.publish(topic, JSON.stringify({ type: 'REPLY', id: REGIAO, id_target: json.id, timestamp: current_time }));
-                    } else if (json.id == 'D' && json.id != REGIAO) {
-                        clientD.publish(topic, JSON.stringify({ type: 'REPLY', id: REGIAO, id_target: json.id, timestamp: current_time }));
+                console.log(REGIAO, " recebeu REQ de ", json.id," Current_temp atual=", mutualExclusionServices.getCurrentTime())
+
+                let sc = null;
+                let aux = false;
+                if (mutualExclusionServices.getListTrash() == 0) { //NAO DESEJA ACESSAR A SC
+                    mutualExclusionServices.setFalseRequesting()
+                } else {
+                    console.log("Tamanho da lista: ", json.list_trash.length)
+                    for (let i = 0; i < json.list_trash.length; i++) {
+                        sc = mutualExclusionServices.getListTrash().find(lixeira =>
+                            (lixeira.id == json.list_trash[i].id) &&
+                            (lixeira.regiao == json.list_trash[i].regiao));
+
+                        if (sc != null) { //ENCONTROU A MEMSA LIXEIRA EM AMBAS AS REQUESIÇÕES
+                            aux = true;
+                            mutualExclusionServices.setTrueRequesting();
+                            break;
+                        }
                     }
                 }
-            }
-            if (json.type == 'REPLY') {
-                if (json.id_target == REGIAO) {
-                    mutualExclusionServices.setReplyPending();
-                    mutualExclusionServices.setCurrentTime(json.timestamp);
+                if (!aux) {
+                    sendReply(json, current_time);
+                    aux = false;
+                } else {
+                    console.log(`Timestamp ${REGIAO} = ${mutualExclusionServices.getTimestamp()} e timestamp ${json.id} = ${json.timestamp}`);
+                    console.log(!mutualExclusionServices.getIsRequesting(), (mutualExclusionServices.getTimestamp() > json.timestamp), REGIAO > json.id)
+                    if ((mutualExclusionServices.getTimestamp() > json.timestamp)) {
+                        sendReply(json, current_time);
+                    } else if ((mutualExclusionServices.getTimestamp() == json.timestamp)) {
+                        if (REGIAO > json.id) {
+                            sendReply(json, current_time);
+                        }
+                    }
                 }
+
             }
         }
     });
@@ -359,31 +397,44 @@ if (REGIAO != 'C') {
 
     clientC.on('message', function (topic, message) {
         var json = JSON.parse(message.toString());
-        console.log("REGIAO C", topic);
         if (topic == "mutual-exclusion") {
-            console.log(json.type)
-            if (mutualExclusionServices.getReplyPending() == 0) {
-                console.log(`Caminhao ${REGIAO} entrou na sessão crítica`);
-            }
             if (json.type == 'REQ') {
                 let current_time = mutualExclusionServices.setCurrentTime(json.timestamp);
-                if (mutualExclusionServices.getIsRequesting() || mutualExclusionServices.getTimestamp() > json.timestamp) {
-                    if (json.id == 'A' && json.id != REGIAO) {
-                        clientA.publish(topic, JSON.stringify({ type: 'REPLY', id: REGIAO, id_target: json.id, timestamp: current_time }));
-                    } else if (json.id == 'B' && json.id != REGIAO) {
-                        clientB.publish(topic, JSON.stringify({ type: 'REPLY', id: REGIAO, id_target: json.id, timestamp: current_time }));
-                    } else if (json.id == 'C' && json.id != REGIAO) {
-                        clientC.publish(topic, JSON.stringify({ type: 'REPLY', id: REGIAO, id_target: json.id, timestamp: current_time }));
-                    } else if (json.id == 'D' && json.id != REGIAO) {
-                        clientD.publish(topic, JSON.stringify({ type: 'REPLY', id: REGIAO, id_target: json.id, timestamp: current_time }));
+                console.log(REGIAO, " recebeu REQ de ", json.id," Current_temp atual=", mutualExclusionServices.getCurrentTime())
+
+                let sc = null;
+                let aux = false;
+                if (mutualExclusionServices.getListTrash() == 0) { //NAO DESEJA ACESSAR A SC
+                    mutualExclusionServices.setFalseRequesting()
+                } else {
+                    console.log("Tamanho da lista: ", json.list_trash.length)
+                    for (let i = 0; i < json.list_trash.length; i++) {
+                        sc = mutualExclusionServices.getListTrash().find(lixeira =>
+                            (lixeira.id == json.list_trash[i].id) &&
+                            (lixeira.regiao == json.list_trash[i].regiao));
+
+                        if (sc != null) { //ENCONTROU A MEMSA LIXEIRA EM AMBAS AS REQUESIÇÕES
+                            aux = true;
+                            mutualExclusionServices.setTrueRequesting();
+                            break;
+                        }
                     }
                 }
-            }
-            if (json.type == 'REPLY') {
-                if (json.id_target == REGIAO) {
-                    mutualExclusionServices.setReplyPending();
-                    mutualExclusionServices.setCurrentTime(json.timestamp);
+                if (!aux) {
+                    sendReply(json, current_time);
+                    aux = false;
+                } else {
+                    console.log(`Timestamp ${REGIAO} = ${mutualExclusionServices.getTimestamp()} e timestamp ${json.id} = ${json.timestamp}`);
+                    console.log(!mutualExclusionServices.getIsRequesting(), (mutualExclusionServices.getTimestamp() > json.timestamp), REGIAO > json.id)
+                    if ((mutualExclusionServices.getTimestamp() > json.timestamp)) {
+                        sendReply(json, current_time);
+                    } else if ((mutualExclusionServices.getTimestamp() == json.timestamp)) {
+                        if (REGIAO > json.id) {
+                            sendReply(json, current_time);
+                        }
+                    }
                 }
+
             }
         }
     });
@@ -430,34 +481,59 @@ if (REGIAO != 'D') {
 
     clientD.on('message', function (topic, message) {
         var json = JSON.parse(message.toString());
-        console.log("REGIAO D", topic);
         if (topic == "mutual-exclusion") {
-            console.log(json.type)
-            if (mutualExclusionServices.getReplyPending() == 0) {
-                console.log(`Caminhao ${REGIAO} entrou na sessão crítica`);
-            }
             if (json.type == 'REQ') {
                 let current_time = mutualExclusionServices.setCurrentTime(json.timestamp);
-                if (mutualExclusionServices.getIsRequesting() || mutualExclusionServices.getTimestamp() > json.timestamp) {
-                    if (json.id == 'A' && json.id != REGIAO) {
-                        clientA.publish(topic, JSON.stringify({ type: 'REPLY', id: REGIAO, id_target: json.id, timestamp: current_time }));
-                    } else if (json.id == 'B' && json.id != REGIAO) {
-                        clientB.publish(topic, JSON.stringify({ type: 'REPLY', id: REGIAO, id_target: json.id, timestamp: current_time }));
-                    } else if (json.id == 'C' && json.id != REGIAO) {
-                        clientC.publish(topic, JSON.stringify({ type: 'REPLY', id: REGIAO, id_target: json.id, timestamp: current_time }));
-                    } else if (json.id == 'D' && json.id != REGIAO) {
-                        clientD.publish(topic, JSON.stringify({ type: 'REPLY', id: REGIAO, id_target: json.id, timestamp: current_time }));
+                console.log(REGIAO, " recebeu REQ de ", json.id," Current_temp atual=", mutualExclusionServices.getCurrentTime())
+
+                let sc = null;
+                let aux = false;
+                if (mutualExclusionServices.getListTrash() == 0) { //NAO DESEJA ACESSAR A SC
+                    mutualExclusionServices.setFalseRequesting()
+                } else {
+                    console.log("Tamanho da lista: ", json.list_trash.length)
+                    for (let i = 0; i < json.list_trash.length; i++) {
+                        sc = mutualExclusionServices.getListTrash().find(lixeira =>
+                            (lixeira.id == json.list_trash[i].id) &&
+                            (lixeira.regiao == json.list_trash[i].regiao));
+
+                        if (sc != null) { //ENCONTROU A MEMSA LIXEIRA EM AMBAS AS REQUESIÇÕES
+                            aux = true;
+                            mutualExclusionServices.setTrueRequesting();
+                            break;
+                        }
                     }
                 }
-            }
-            if (json.type == 'REPLY') {
-                if (json.id_target == REGIAO) {
-                    mutualExclusionServices.setReplyPending();
-                    mutualExclusionServices.setCurrentTime(json.timestamp);
+                if (!aux) {
+                    sendReply(json, current_time);
+                    aux = false;
+                } else {
+                    console.log(`Timestamp ${REGIAO} = ${mutualExclusionServices.getTimestamp()} e timestamp ${json.id} = ${json.timestamp}`);
+                    console.log(!mutualExclusionServices.getIsRequesting(), (mutualExclusionServices.getTimestamp() > json.timestamp), REGIAO > json.id)
+                    if ((mutualExclusionServices.getTimestamp() > json.timestamp)) {
+                        sendReply(json, current_time);
+                    } else if ((mutualExclusionServices.getTimestamp() == json.timestamp)) {
+                        if (REGIAO > json.id) {
+                            sendReply(json, current_time);
+                        }
+                    }
                 }
+
             }
         }
     });
+}
+
+const sendReply = (json, current_time) => {
+    if (json.id == 'A' && json.id != REGIAO) {
+        clientA.publish(`reply-A`, JSON.stringify({ type: 'REPLY', id: REGIAO, id_target: json.id, timestamp: current_time }));
+    } else if (json.id == 'B' && json.id != REGIAO) {
+        clientB.publish(`reply-B`, JSON.stringify({ type: 'REPLY', id: REGIAO, id_target: json.id, timestamp: current_time }));
+    } else if (json.id == 'C' && json.id != REGIAO) {
+        clientC.publish(`reply-C`, JSON.stringify({ type: 'REPLY', id: REGIAO, id_target: json.id, timestamp: current_time }));
+    } else if (json.id == 'D' && json.id != REGIAO) {
+        clientD.publish(`reply-D`, JSON.stringify({ type: 'REPLY', id: REGIAO, id_target: json.id, timestamp: current_time }));
+    }
 }
 
 

@@ -20,8 +20,9 @@ class MutualExclusion {
     enter_cs(trash){
         console.log("ENTER_CS");
         this.list_trash = trash;
+        this.current_time = 0;
         this.my_timestamp = this.current_time;
-        this.is_requesting = true;
+        //this.is_requesting = true;
         this.replies_pending = 3;
         this.mqtt_client.publish(this.topic, JSON.stringify({type:'REQ', id:this.region, list_trash: trash ,timestamp: this.my_timestamp}));
     }
@@ -33,6 +34,8 @@ class MutualExclusion {
     setCurrentTime(time){
         if(this.current_time < time){
             this.current_time = time + 1;
+        }else{
+            this.current_time = this.current_time + 1;
         }
         return this.current_time;
     }
@@ -41,15 +44,31 @@ class MutualExclusion {
         return this.my_timestamp;
     }
 
+    getCurrentTime(){
+        return this.current_time;
+    }
+
     getIsRequesting(){
         return this.is_requesting;
     }
 
-    setReplyPending(){
-        this.replies_pending = this.replies_pending-1;
+    setReplyPending(num){
+        this.replies_pending = this.replies_pending+num;
     }
     getReplyPending(){
         return this.replies_pending;
+    }
+
+    getListTrash(){
+        return this.list_trash;
+    }
+
+    setFalseRequesting(){
+        this.is_requesting = false;
+    }
+
+    setTrueRequesting(){
+        this.is_requesting = true;
     }
 }
 

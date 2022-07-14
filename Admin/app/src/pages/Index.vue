@@ -102,22 +102,23 @@ export default {
       }
     },
     reserve() {
-      let listSelectedA = this.regions.find(e => e.label == 'A').list_selected;
       let listSelectedB = this.regions.find(e => e.label == 'B').list_selected;
+      let listSelectedA = this.regions.find(e => e.label == 'A').list_selected;
       let listSelectedC = this.regions.find(e => e.label == 'C').list_selected;
       let listSelectedD = this.regions.find(e => e.label == 'D').list_selected;
 
-      TrashService.reserve('A', listSelectedA).then(data => {
-        console.log(data)
-      }).catch(e => {
-        console.log(e);
-      });
+     
       TrashService.reserve('B', listSelectedA).then(data => {
         console.log(data)
       }).catch(e => {
         console.log(e);
       });
-      TrashService.reserve('C', listSelectedC).then(data => {
+       TrashService.reserve('A', listSelectedA).then(data => {
+        console.log(data)
+      }).catch(e => {
+        console.log(e);
+      });
+      TrashService.reserve('C', listSelectedD).then(data => {
         console.log(data)
       }).catch(e => {
         console.log(e);
