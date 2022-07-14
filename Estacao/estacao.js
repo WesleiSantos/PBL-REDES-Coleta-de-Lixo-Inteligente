@@ -194,8 +194,38 @@ client.on('message', function (topic, message) {
             mutualExclusionServices.setRegionCritical(true);
             console.log("REGIAO CRITICA: ", mutualExclusionServices.getRegionCritical())
             mutualExclusionServices.setReplyPending(3);
-        }
+            for(let trash of mutualExclusionServices.getListTrash()){
+                trash.capacidade=0.0;
+                trash = {...trash, regiao: trash.region}
+                console.log("trash:",trash)
+                if(trash.region == 'A'){
+                    if(REGIAO == 'A'){
+                        client.publish(`cmd/caminhao/regiao_A/lixeira/esvaziar`, JSON.stringify(trash));
+                    }else{
+                        clientA.publish(`cmd/caminhao/regiao_A/lixeira/esvaziar`, JSON.stringify(trash));
+                    }
+                }else if(trash.region== 'B'){
+                    if(REGIAO == 'B'){
+                        client.publish(`cmd/caminhao/regiao_B/lixeira/esvaziar`, JSON.stringify(trash));
+                    }else{
+                        clientB.publish(`cmd/caminhao/regiao_B/lixeira/esvaziar`, JSON.stringify(trash));
+                    }
+                }else if(trash.region== 'C'){
+                    if(REGIAO == 'C'){
+                        client.publish(`cmd/caminhao/regiao_C/lixeira/esvaziar`, JSON.stringify(trash));
+                    }else{
+                        clientC.publish(`cmd/caminhao/regiao_C/lixeira/esvaziar`, JSON.stringify(trash));
+                    }
+                }else if(trash.region== 'D'){
+                    if(REGIAO == 'D'){
+                        client.publish(`cmd/caminhao/regiao_D/lixeira/esvaziar`, JSON.stringify(trash));
+                    }else{
+                        clientD.publish(`cmd/caminhao/regiao_D/lixeira/esvaziar`, JSON.stringify(trash));
+                    }
+                }
 
+            }
+        }
     }
 });
 

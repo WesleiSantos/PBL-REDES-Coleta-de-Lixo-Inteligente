@@ -28,6 +28,13 @@ class MutualExclusion {
         this.replies_pending = 3;
         this.mqtt_client.publish(this.topic, JSON.stringify({type:'REQ', id:this.region, list_trash: trash ,timestamp: this.my_timestamp}));
     }
+    reset(){
+        this.list_trash=[]
+        this.is_region_critical=false;
+        this.current_time = 0;
+        this.my_timestamp=0;
+        this.replies_pending = 3;
+    }
 
     exit_CS(){
         this.is_requesting = false;

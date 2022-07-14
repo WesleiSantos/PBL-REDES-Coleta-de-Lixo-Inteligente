@@ -9,7 +9,7 @@ class LixeiraIndexController {
     async index(req, res) {
         let qtd_lixeiras = req.params.qtd
         //const axios = require('axios');
-
+        this.mutualExclusionServices.reset();
         let estacoes = [req.params.reg1, req.params.reg2, req.params.reg3]
         console.log(">>> REGION 1 = " + estacoes[0])
         console.log(">>> REGION 2 = " + estacoes[1])

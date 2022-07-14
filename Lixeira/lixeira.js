@@ -83,11 +83,11 @@ function create_lixeira(id, latitude, longitude) {
   client.on("message", function (topic, message) {
 
     if (topic == topico_coleta) {
-      console.log("Received Message:", topic, message.toString());
+      //console.log("Received Message:", topic, message.toString());
       var json = JSON.parse(message);
       if (json.id == payload.id && json.regiao == payload.regiao) {
         payload.capacidade = 0.0;
-        console.log(JSON.stringify(json.topico))
+        //console.log(JSON.stringify(json.topico))
         client.publish(json.topico, JSON.stringify(payload))
       }
     }
