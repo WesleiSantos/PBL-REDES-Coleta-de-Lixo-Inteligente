@@ -1,4 +1,4 @@
-# PBL-REDES 2 Coleta de Lixo Inteligente - PARTE 2
+# PBL-REDES 3 Coleta de Lixo Inteligente - PARTE 3
 
 ## 📁 Acesso ao projeto
 Você pode acessar os arquivos do projeto clicando [aqui](https://github.com/WesleiSantos/PBL-REDES-MQTT.git).
