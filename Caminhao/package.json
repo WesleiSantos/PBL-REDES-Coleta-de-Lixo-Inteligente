@@ -11,8 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mqtt": "^4.3.7",
+    "axios": "^0.27.2",
     "connect-redis": "^5.0.0",
+    "mqtt": "^4.3.7",
     "redis": "^3.0.2",
     "redis-rejson": "^1.0.0"
   },

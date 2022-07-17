@@ -83,11 +83,11 @@ function create_lixeira(id, latitude, longitude) {
   client.on("message", function (topic, message) {
 
     if (topic == topico_coleta) {
-      console.log("Received Message:", topic, message.toString());
+      //console.log("Received Message:", topic, message.toString());
       var json = JSON.parse(message);
       if (json.id == payload.id && json.regiao == payload.regiao) {
         payload.capacidade = 0.0;
-        console.log(JSON.stringify(json.topico))
+        //console.log(JSON.stringify(json.topico))
         client.publish(json.topico, JSON.stringify(payload))
       }
     }
@@ -107,7 +107,6 @@ function create_lixeira(id, latitude, longitude) {
     //GERA O LIXO E ENVIA PARA O TÓPICO RESPONSÁVEL (ESTAÇÃO)
     setInterval(() => {
       var capacidade = "" + Math.floor(5 * Math.random() + 1) + "%";
-      
       //evitar que ultrapasse a 100%
       if (parseFloat(payload.capacidade) < 100 && parseFloat(payload.capacidade) + parseFloat(capacidade) <= 100) {
         payload.capacidade = parseFloat(payload.capacidade) + parseFloat(capacidade);
@@ -116,7 +115,7 @@ function create_lixeira(id, latitude, longitude) {
       }
 
       client.publish(topic, JSON.stringify(payload));
-      console.log("mensagem enviada: " + JSON.stringify(payload));
+      //console.log("mensagem enviada: " + JSON.stringify(payload));
     }, TEMPO_ENV);
   });
 

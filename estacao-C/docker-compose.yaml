@@ -53,6 +53,10 @@ services:
     command: sh -c "npm install && npm start"
     env_file:
       - .env
+      - ../.brokers.env
+    environment:
+      - BROKER_HOST = ${BROKER_HOST}
+      - BROKER_PORT = ${BROKER_PORT_1} 
     networks:
         my-network: 
           ipv4_address: ${EXPRESS_HOST}

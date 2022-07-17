@@ -6,7 +6,9 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const RedisClient = require('./services/RedisClient');
 const Utils = require('./services/Utils');
+const MutualExclusion = require('./services/MutualExclusion');
 const mqtt = require('mqtt');
+const axios = require('axios');
 
 rejson(redis);
 require('dotenv').config();
@@ -32,33 +34,28 @@ util.limpaBD().then(data => {
     console.log(data);
 });
 
-//***************************    EXPRESS    ********************************//
-const app = express();
-app.use(
-    cors({
-        origin(origin, callback) {
-            callback(null, true);
-        },
-        credentials: true
-    })
-);
-app.set('redisClientService', redisClientService);
-app.set('utils', util);
-app.use(bodyParser.json());
-const router = require('./routes')(app);
-app.use('/api', router);
-const portApp = 3000;
-app.listen(portApp, () => {
-    console.log(`App listening on port ${portApp}`);
-});
 
-//***************************     MQTT    ********************************//
+//***************************     MQTT  Broker  ********************************//
 const clientId = `mqtt_${Math.random().toString(16).slice(3)}`;
 const connectUrl = `mqtt://${BROKER_HOST}:${BROKER_PORT}`;
 let caminhao_posicao_latitude;
 let caminhao_posicao_longitude;
+let topic = "mutual-exclusion";
+const {
+    BROKER_HOST_A,
+    BROKER_PORT_2_A,
+    BROKER_HOST_B,
+    BROKER_PORT_2_B,
+    BROKER_HOST_C,
+    BROKER_PORT_2_C,
+    BROKER_HOST_D,
+    BROKER_PORT_2_D
+} = process.env;
+let client, clientA, clientB, clientC, clientD;
+let _process = [];
 
-let client = mqtt.connect(connectUrl, {
+
+client = mqtt.connect(connectUrl, {
     clientId,
     clean: true,
     connectTimeout: 4000,
@@ -66,6 +63,8 @@ let client = mqtt.connect(connectUrl, {
     password: 'public',
     reconnectPeriod: 1000
 });
+
+const mutualExclusionServices = new MutualExclusion(client, topic, REGIAO);
 
 //tópicos
 const topicLixeira = `dt/regiao_${REGIAO}/lixeira/qtd_lixo`;
@@ -129,14 +128,18 @@ client.on('connect', function () {
     client.subscribe([topico_limpar_lixeira], () => {
         console.log(`Subscribe to topic '${topico_limpar_lixeira}'`);
     });
+    client.subscribe([`reply-${REGIAO}`], () => {
+        console.log(`Subscribe to topic 'reply-${REGIAO}'`);
+    });
 });
 
 /**
  * RECEBE MENSAGENS DOS  TÓPICOS QUE ESTAO INSCRITOS 
  */
 client.on('message', function (topic, message) {
-    console.log('Received Message:', topic, message.toString());
+    //console.log('Received Message:', topic, message.toString());
     var json = JSON.parse(message.toString());
+
     if (topic == topicLixeira) {
         json.distancia = calcularDistancia(caminhao_posicao_latitude, caminhao_posicao_longitude, json.latitude, json.longitude).toFixed(2)
         redisClientService.jsonSet(`lixeira:${json.id}`, '.', JSON.stringify(json));
@@ -144,9 +147,9 @@ client.on('message', function (topic, message) {
         //faz a ordenação das lixeiras da mais crítica à vazia.
         util.ordenaLixeiras().then(data => {
             let list_ordena_capacidade = data;
-            console.log('LISTA ORDENADA: ');
+            //console.log('LISTA ORDENADA: ');
             for (let i = 0; i < list_ordena_capacidade.length; i++) {
-                console.log(JSON.stringify(list_ordena_capacidade[i]));
+                //console.log(JSON.stringify(list_ordena_capacidade[i]));
             }
 
             //ordena-as pela distancia entre elas e o caminhao
@@ -178,5 +181,419 @@ client.on('message', function (topic, message) {
         caminhao_posicao_latitude = json.latitude;
         caminhao_posicao_longitude = json.longitude;
     }
+    if (topic == `reply-${REGIAO}`) {
+        console.log("VEIO NO topico ", `reply-${REGIAO}`);
+        console.log('REPLY ENVIADO POR: ', json.id)
+        mutualExclusionServices.setReplyPending(-1);
+        mutualExclusionServices.setCurrentTime(json.timestamp);
+        console.log("QTD REPLY", mutualExclusionServices.getReplyPending())
+    }
+    if (mutualExclusionServices.getReplyPending() == 0) {
+        if (mutualExclusionServices.getListTrash().length>0) {
+            console.log(`Caminhao ${REGIAO} entrou na sessão crítica`);
+            mutualExclusionServices.setRegionCritical(true);
+            console.log("REGIAO CRITICA: ", mutualExclusionServices.getRegionCritical())
+            mutualExclusionServices.setReplyPending(3);
+            for(let trash of mutualExclusionServices.getListTrash()){
+                trash.capacidade=0.0;
+                trash = {...trash, regiao: trash.region}
+                console.log("trash:",trash)
+                if(trash.region == 'A'){
+                    if(REGIAO == 'A'){
+                        client.publish(`cmd/caminhao/regiao_A/lixeira/esvaziar`, JSON.stringify(trash));
+                    }else{
+                        clientA.publish(`cmd/caminhao/regiao_A/lixeira/esvaziar`, JSON.stringify(trash));
+                    }
+                }else if(trash.region== 'B'){
+                    if(REGIAO == 'B'){
+                        client.publish(`cmd/caminhao/regiao_B/lixeira/esvaziar`, JSON.stringify(trash));
+                    }else{
+                        clientB.publish(`cmd/caminhao/regiao_B/lixeira/esvaziar`, JSON.stringify(trash));
+                    }
+                }else if(trash.region== 'C'){
+                    if(REGIAO == 'C'){
+                        client.publish(`cmd/caminhao/regiao_C/lixeira/esvaziar`, JSON.stringify(trash));
+                    }else{
+                        clientC.publish(`cmd/caminhao/regiao_C/lixeira/esvaziar`, JSON.stringify(trash));
+                    }
+                }else if(trash.region== 'D'){
+                    if(REGIAO == 'D'){
+                        client.publish(`cmd/caminhao/regiao_D/lixeira/esvaziar`, JSON.stringify(trash));
+                    }else{
+                        clientD.publish(`cmd/caminhao/regiao_D/lixeira/esvaziar`, JSON.stringify(trash));
+                    }
+                }
 
+            }
+        }
+    }
+});
+
+
+if (REGIAO != 'A') {
+    //***************************     MQTT  Broker A  ********************************//
+    const clientAId = `mqtt_${Math.random().toString(16).slice(3)}`;
+    const connecAtUrl = `mqtt://${BROKER_HOST_A}:${BROKER_PORT_2_A}`;
+
+    clientA = mqtt.connect(connecAtUrl, {
+        clientAId,
+        clean: true,
+        connectTimeout: 4000,
+        username: 'emqx',
+        password: 'public',
+        reconnectPeriod: 1000
+    });
+    _process.push(clientA)
+
+    clientA.on('error', function (err) {
+        console.log('Error: ' + err);
+        if (err.code == 'ENOTFOUND') {
+            console.log('Network error, make sure you have an active internet connection');
+        }
+    });
+    clientA.on('connect', function () {
+        console.log('Cliente A Conectado ao MQTT');
+        clientA.subscribe([topic], () => {
+            console.log(`Subscribe to topic '${topic}'`);
+        });
+    });
+
+    clientA.on('reconnect', function () {
+        console.log('Client A trying a reconnection');
+    });
+
+    clientA.on('offline', function () {
+        console.log('Client A is currently offline');
+    });
+
+    clientA.on('message', function (topic, message) {
+        var json = JSON.parse(message.toString());
+        if (topic == "mutual-exclusion") {
+            if (json.type == 'REQ') {
+                let current_time = mutualExclusionServices.setCurrentTime(json.timestamp);
+                console.log(REGIAO, " recebeu REQ de ", json.id, " Current_temp atual=", mutualExclusionServices.getCurrentTime())
+
+                let sc = null;
+                let aux = false;
+                if (mutualExclusionServices.getListTrash() == 0) { //NAO DESEJA ACESSAR A SC
+                    mutualExclusionServices.setFalseRequesting()
+                } else {
+                    console.log("Tamanho da lista: ", json.list_trash.length)
+                    for (let i = 0; i < json.list_trash.length; i++) {
+                        sc = mutualExclusionServices.getListTrash().find(lixeira =>
+                            (lixeira.id == json.list_trash[i].id) &&
+                            (lixeira.regiao == json.list_trash[i].regiao));
+
+                        if (sc != null) { //ENCONTROU A MEMSA LIXEIRA EM AMBAS AS REQUESIÇÕES
+                            aux = true;
+                            mutualExclusionServices.setTrueRequesting();
+                            break;
+                        }
+                    }
+                }
+                if (!aux) {
+                    sendReply(json, current_time);
+                    aux = false;
+                } else {
+                    console.log(`Timestamp ${REGIAO} = ${mutualExclusionServices.getTimestamp()} e timestamp ${json.id} = ${json.timestamp}`);
+                    console.log(!mutualExclusionServices.getIsRequesting(), (mutualExclusionServices.getTimestamp() > json.timestamp), REGIAO > json.id)
+                    if ((mutualExclusionServices.getTimestamp() > json.timestamp)) {
+                        sendReply(json, current_time);
+                    } else if ((mutualExclusionServices.getTimestamp() == json.timestamp)) {
+                        if (REGIAO > json.id) {
+                            sendReply(json, current_time);
+                        }
+                    }
+                }
+
+            }
+        }
+    })
+
+}
+
+if (REGIAO != 'B') {
+    //***************************     MQTT  Broker B  ********************************//
+    const clientBId = `mqtt_${Math.random().toString(16).slice(3)}`;
+    const connectBUrl = `mqtt://${BROKER_HOST_B}:${BROKER_PORT_2_B}`;
+
+    clientB = mqtt.connect(connectBUrl, {
+        clientBId,
+        clean: true,
+        connectTimeout: 4000,
+        username: 'emqx',
+        password: 'public',
+        reconnectPeriod: 1000
+    });
+
+    clientB.on('error', function (err) {
+        console.log('Error: ' + err);
+        if (err.code == 'ENOTFOUND') {
+            console.log('Network error, make sure you have an active internet connection');
+        }
+    });
+
+    clientB.on('connect', function () {
+        console.log('Cliente B Conectado ao MQTT');
+        clientB.subscribe([topic], () => {
+            console.log(` Cliente B Subscribe to topic '${topic}'`);
+        });
+    });
+
+    clientB.on('reconnect', function () {
+        console.log('Client B trying a reconnection');
+    });
+
+    clientB.on('offline', function () {
+        console.log('Client B is currently offline');
+    });
+
+    clientB.on('message', function (topic, message) {
+        var json = JSON.parse(message.toString());
+        if (topic == "mutual-exclusion") {
+            if (json.type == 'REQ') {
+                let current_time = mutualExclusionServices.setCurrentTime(json.timestamp);
+                console.log(REGIAO, " recebeu REQ de ", json.id, " Current_temp atual=", mutualExclusionServices.getCurrentTime())
+
+                let sc = null;
+                let aux = false;
+                if (mutualExclusionServices.getListTrash() == 0) { //NAO DESEJA ACESSAR A SC
+                    mutualExclusionServices.setFalseRequesting()
+                } else {
+                    console.log("Tamanho da lista: ", json.list_trash.length)
+                    for (let i = 0; i < json.list_trash.length; i++) {
+                        sc = mutualExclusionServices.getListTrash().find(lixeira =>
+                            (lixeira.id == json.list_trash[i].id) &&
+                            (lixeira.regiao == json.list_trash[i].regiao));
+
+                        if (sc != null) { //ENCONTROU A MEMSA LIXEIRA EM AMBAS AS REQUESIÇÕES
+                            aux = true;
+                            mutualExclusionServices.setTrueRequesting();
+                            break;
+                        }
+                    }
+                }
+                if (!aux) {
+                    sendReply(json, current_time);
+                    aux = false;
+                } else {
+                    console.log(`Timestamp ${REGIAO} = ${mutualExclusionServices.getTimestamp()} e timestamp ${json.id} = ${json.timestamp}`);
+                    console.log(!mutualExclusionServices.getIsRequesting(), (mutualExclusionServices.getTimestamp() > json.timestamp), REGIAO > json.id)
+                    if ((mutualExclusionServices.getTimestamp() > json.timestamp)) {
+                        sendReply(json, current_time);
+                    } else if ((mutualExclusionServices.getTimestamp() == json.timestamp)) {
+                        if (REGIAO > json.id) {
+                            sendReply(json, current_time);
+                        }
+                    }
+                }
+
+            }
+        }
+    });
+}
+
+if (REGIAO != 'C') {
+
+    //***************************     MQTT  Broker C  ********************************//
+    const clientCId = `mqtt_${Math.random().toString(16).slice(3)}`;
+    const connectCUrl = `mqtt://${BROKER_HOST_C}:${BROKER_PORT_2_C}`;
+
+    clientC = mqtt.connect(connectCUrl, {
+        clientCId,
+        clean: true,
+        connectTimeout: 4000,
+        username: 'emqx',
+        password: 'public',
+        reconnectPeriod: 1000
+    });
+
+    clientC.on('error', function (err) {
+        console.log('Error: ' + err);
+        if (err.code == 'ENOTFOUND') {
+            console.log('Network error, make sure you have an active internet connection');
+        }
+    });
+
+    clientC.on('connect', function () {
+        console.log('Cliente C Conectado ao MQTT');
+        clientC.subscribe([topic], () => {
+            console.log(`Subscribe to topic '${topic}'`);
+        });
+    });
+
+    clientC.on('reconnect', function () {
+        console.log('Client C trying a reconnection');
+    });
+
+    clientC.on('offline', function () {
+        console.log('Client C B is currently offline');
+    });
+
+    clientC.on('message', function (topic, message) {
+        var json = JSON.parse(message.toString());
+        if (topic == "mutual-exclusion") {
+            if (json.type == 'REQ') {
+                let current_time = mutualExclusionServices.setCurrentTime(json.timestamp);
+                console.log(REGIAO, " recebeu REQ de ", json.id, " Current_temp atual=", mutualExclusionServices.getCurrentTime())
+
+                let sc = null;
+                let aux = false;
+                if (mutualExclusionServices.getListTrash() == 0) { //NAO DESEJA ACESSAR A SC
+                    mutualExclusionServices.setFalseRequesting()
+                } else {
+                    console.log("Tamanho da lista: ", json.list_trash.length)
+                    for (let i = 0; i < json.list_trash.length; i++) {
+                        sc = mutualExclusionServices.getListTrash().find(lixeira =>
+                            (lixeira.id == json.list_trash[i].id) &&
+                            (lixeira.regiao == json.list_trash[i].regiao));
+
+                        if (sc != null) { //ENCONTROU A MEMSA LIXEIRA EM AMBAS AS REQUESIÇÕES
+                            aux = true;
+                            mutualExclusionServices.setTrueRequesting();
+                            break;
+                        }
+                    }
+                }
+                if (!aux) {
+                    sendReply(json, current_time);
+                    aux = false;
+                } else {
+                    console.log(`Timestamp ${REGIAO} = ${mutualExclusionServices.getTimestamp()} e timestamp ${json.id} = ${json.timestamp}`);
+                    console.log(!mutualExclusionServices.getIsRequesting(), (mutualExclusionServices.getTimestamp() > json.timestamp), REGIAO > json.id)
+                    if ((mutualExclusionServices.getTimestamp() > json.timestamp)) {
+                        sendReply(json, current_time);
+                    } else if ((mutualExclusionServices.getTimestamp() == json.timestamp)) {
+                        if (REGIAO > json.id) {
+                            sendReply(json, current_time);
+                        }
+                    }
+                }
+
+            }
+        }
+    });
+}
+
+if (REGIAO != 'D') {
+
+    //***************************     MQTT  Broker D  ********************************//
+    const clientDId = `mqtt_${Math.random().toString(16).slice(3)}`;
+    const connectDUrl = `mqtt://${BROKER_HOST_D}:${BROKER_PORT_2_D}`;
+    console.log(connectDUrl)
+
+    clientD = mqtt.connect(connectDUrl, {
+        clientDId,
+        clean: true,
+        connectTimeout: 4000,
+        username: 'emqx',
+        password: 'public',
+        reconnectPeriod: 1000
+    });
+
+
+    clientD.on('error', function (err) {
+        console.log('Error: ' + err);
+        if (err.code == 'ENOTFOUND') {
+            console.log('Network error, make sure you have an active internet connection');
+        }
+    });
+
+    clientD.on('connect', function () {
+        console.log('Cliente D Conectado ao MQTT');
+        clientD.subscribe([topic], () => {
+            console.log(`Subscribe to topic '${topic}'`);
+        });
+    });
+
+    clientD.on('reconnect', function () {
+        console.log('Client D trying a reconnection');
+    });
+
+    clientD.on('offline', function () {
+        console.log('Client D B is currently offline');
+    });
+
+    clientD.on('message', function (topic, message) {
+        var json = JSON.parse(message.toString());
+        if (topic == "mutual-exclusion") {
+            if (json.type == 'REQ') {
+                let current_time = mutualExclusionServices.setCurrentTime(json.timestamp);
+                console.log(REGIAO, " recebeu REQ de ", json.id, " Current_temp atual=", mutualExclusionServices.getCurrentTime())
+
+                let sc = null;
+                let aux = false;
+                if (mutualExclusionServices.getListTrash() == 0) { //NAO DESEJA ACESSAR A SC
+                    mutualExclusionServices.setFalseRequesting()
+                } else {
+                    console.log("Tamanho da lista: ", json.list_trash.length)
+                    for (let i = 0; i < json.list_trash.length; i++) {
+                        sc = mutualExclusionServices.getListTrash().find(lixeira =>
+                            (lixeira.id == json.list_trash[i].id) &&
+                            (lixeira.regiao == json.list_trash[i].regiao));
+
+                        if (sc != null) { //ENCONTROU A MEMSA LIXEIRA EM AMBAS AS REQUESIÇÕES
+                            aux = true;
+                            mutualExclusionServices.setTrueRequesting();
+                            break;
+                        }
+                    }
+                }
+                if (!aux) {
+                    sendReply(json, current_time);
+                    aux = false;
+                } else {
+                    console.log(`Timestamp ${REGIAO} = ${mutualExclusionServices.getTimestamp()} e timestamp ${json.id} = ${json.timestamp}`);
+                    console.log(!mutualExclusionServices.getIsRequesting(), (mutualExclusionServices.getTimestamp() > json.timestamp), REGIAO > json.id)
+                    if ((mutualExclusionServices.getTimestamp() > json.timestamp)) {
+                        sendReply(json, current_time);
+                    } else if ((mutualExclusionServices.getTimestamp() == json.timestamp)) {
+                        if (REGIAO > json.id) {
+                            sendReply(json, current_time);
+                        }
+                    }
+                }
+
+            }
+        }
+    });
+}
+
+const sendReply = (json, current_time) => {
+    if (json.id == 'A' && json.id != REGIAO) {
+        clientA.publish(`reply-A`, JSON.stringify({ type: 'REPLY', id: REGIAO, id_target: json.id, timestamp: current_time }));
+    } else if (json.id == 'B' && json.id != REGIAO) {
+        clientB.publish(`reply-B`, JSON.stringify({ type: 'REPLY', id: REGIAO, id_target: json.id, timestamp: current_time }));
+    } else if (json.id == 'C' && json.id != REGIAO) {
+        clientC.publish(`reply-C`, JSON.stringify({ type: 'REPLY', id: REGIAO, id_target: json.id, timestamp: current_time }));
+    } else if (json.id == 'D' && json.id != REGIAO) {
+        clientD.publish(`reply-D`, JSON.stringify({ type: 'REPLY', id: REGIAO, id_target: json.id, timestamp: current_time }));
+    }
+}
+
+
+
+
+
+//***************************    EXPRESS    ********************************//
+const app = express();
+app.use(
+    cors({
+        origin(origin, callback) {
+            callback(null, true);
+        },
+        credentials: true
+    })
+);
+app.set('redisClientService', redisClientService);
+app.set('utils', util);
+app.set('axios', axios);
+app.set('mqtt', mqtt);
+app.set('mutualExclusion', mutualExclusionServices);
+app.use(bodyParser.json());
+const router = require('./routes')(app);
+app.use('/api', router);
+const portApp = 3000;
+app.listen(portApp, () => {
+    console.log(`App listening on port ${portApp}`);
 });

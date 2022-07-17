@@ -11,9 +11,10 @@ class Utils {
      * ORDENA OS ELEMENTOS DE ACORDO COM SUA CAPACIDADE EM ORDEM DESCRECENTE.
      * @returns a lista com os elementos ja ordenados.
      */
-    async ordenaLixeiras() {
+    async ordenaLixeiras(array=[]) {
         const productKeys = await this.redisClientService.scan('lixeira:*');
         const productList = [];
+        productList.push(...array);
 
         if (productKeys.length) {
             for (const key of productKeys) {
@@ -21,6 +22,7 @@ class Utils {
 
                 productList.push(JSON.parse(product));
             }
+            
             productList.sort(function (a, b) {
                 if (a.capacidade < b.capacidade) {
                     return 1;
